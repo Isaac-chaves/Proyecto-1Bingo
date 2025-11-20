@@ -1,142 +1,162 @@
 package vista;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.GridLayout;
-import javax.swing.JButton;
+import java.awt.Dimension;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class PanelCartones extends JPanel {
     
-    private final JButton[][] btn;
+    // CAMBIO CLAVE: Usamos JLabel en lugar de JButton
+    private final JLabel[][] lbl;
     private final int numFilas = 5;
     private final int numColumnas = 5;
     
-    // ⭐ CONSTANTES DE COLOR
-    private final Color COLOR_MARCADO = Color.RED;
+    // CONSTANTES DE COLOR
+    private final Color COLOR_MARCADO = Color.RED; // Color de marcado simple y confiable
     private final Color COLOR_TEXTO_MARCADO = Color.WHITE;
-    private final Color COLOR_FONDO_NORMAL = new Color(240, 240, 240); // Gris claro
+    private final Color COLOR_FONDO_NORMAL = new Color(240, 240, 240);
     private final Color COLOR_TEXTO_NORMAL = Color.BLACK; 
     private final String TEXTO_CASILLA_LIBRE = "FREE";
 
     public PanelCartones() {
         this.setLayout(new GridLayout(numFilas, numColumnas, 2, 2));
         this.setBackground(Color.DARK_GRAY);
-        btn = new JButton[numFilas][numColumnas];
-        
-        // ⭐ INICIALIZACIÓN COMPLETA DE BOTONES EN EL CONSTRUCTOR
+        lbl = new JLabel[numFilas][numColumnas];
+
+        // Inicializar etiquetas
         for (int i = 0; i < numFilas; i++) {
             for (int j = 0; j < numColumnas; j++) {
-                btn[i][j] = new JButton();
-                btn[i][j].setFont(new Font("Arial", Font.BOLD, 18));
-                btn[i][j].setOpaque(true);
-                btn[i][j].setBorderPainted(false);
-                this.add(btn[i][j]);
+                lbl[i][j] = new JLabel();
+                // Fuente base
+                lbl[i][j].setFont(new Font("Arial", Font.BOLD, 18));
+                // Alineación al centro
+                lbl[i][j].setHorizontalAlignment(SwingConstants.CENTER);
+                
+                // *** CLAVE: Habilitar la pintura de fondo en JLabel ***
+                lbl[i][j].setOpaque(true);
+                
+                lbl[i][j].setBackground(COLOR_FONDO_NORMAL);
+                lbl[i][j].setForeground(COLOR_TEXTO_NORMAL);
+                
+                this.add(lbl[i][j]);
             }
         }
         
-        // Configura la casilla central "FREE" y luego limpia el resto
-        if (numFilas > 2 && numColumnas > 2) {
-             btn[2][2].setText(TEXTO_CASILLA_LIBRE);
-             btn[2][2].setBackground(Color.BLACK);
-             btn[2][2].setForeground(Color.WHITE);
-        }
-        
-        limpiarCarton(); // Llama al nuevo método para establecer el estado inicial
-    }
-    
-// -------------------------------------------------------------------------
-    
-    /**
-     * Muestra el cartón completo (números y estado de marcado) desde el modelo.
-     * Este método es llamado por actualizarVistaCarton() del controlador.
-     * @param numeros Matriz de números del cartón.
-     * @param marcados Matriz booleana con el estado de marcado.
-     */
-    public void mostrarCarton(int[][] numeros, boolean[][] marcados) {
-        
-        for (int i = 0; i < numFilas; i++) {
-            for (int j = 0; j < numColumnas; j++) {
-                
-                // Omite la casilla central "FREE"
-                if (i == 2 && j == 2) {
-                    continue; 
-                }
-                
-                // 1. Muestra el número
-                btn[i][j].setText(String.valueOf(numeros[i][j]));
-                
-                // 2. Aplica el color según el estado de marcado
-                if (marcados[i][j]) {
-                    // Si está marcado en el modelo, píntalo de ROJO
-                    btn[i][j].setBackground(COLOR_MARCADO);
-                    btn[i][j].setForeground(COLOR_TEXTO_MARCADO);
-                } else {
-                    // Si no está marcado, usa el color normal
-                    btn[i][j].setBackground(COLOR_FONDO_NORMAL);
-                    btn[i][j].setForeground(COLOR_TEXTO_NORMAL);
-                }
-            }
-        }
+        configurarCasillaCentral();
+        limpiarCarton(); 
     }
 
-    /**
-     * Limpia los números y colores del panel, dejando solo la casilla "FREE".
-     * Usado cuando no hay cartones cargados o al inicio del juego.
-     */
-    public void limpiarCarton() {
-        for (int i = 0; i < numFilas; i++) {
-            for (int j = 0; j < numColumnas; j++) {
-                
-                if (i == 2 && j == 2) {
-                    // Mantiene la casilla central como "FREE"
-                    btn[i][j].setText(TEXTO_CASILLA_LIBRE);
-                } else {
-                    // Limpia el texto y restaura los colores
-                    btn[i][j].setText("");
-                    btn[i][j].setBackground(COLOR_FONDO_NORMAL);
-                    btn[i][j].setForeground(COLOR_TEXTO_NORMAL);
-                }
-            }
+    // Casilla central
+    private void configurarCasillaCentral() {
+        if (numFilas > 2 && numColumnas > 2) {
+            lbl[2][2].setText(TEXTO_CASILLA_LIBRE);
+            lbl[2][2].setBackground(Color.BLACK);
+            lbl[2][2].setForeground(Color.WHITE);
+            lbl[2][2].setFont(new Font("Arial", Font.BOLD, 14));
         }
-    } 
+    }
     
-// -------------------------------------------------------------------------
-    
+    // =========================================================================
+    // MÉTODO DE MARCADO INSTANTÁNEO (USADO POR EL CONTROLADOR)
+    // =========================================================================
     /**
-     * Busca y marca la casilla con el número extraído en el cartón (Método de marcado rápido).
-     * @param numero El número extraído.
+     * Busca el número y lo marca con el color de fondo ROJO.
      */
     public void marcarCasilla(int numero) {
-        // Convierte el número a String para compararlo con el texto del botón
         String numStr = String.valueOf(numero);
         
-        // Etiqueta para el bucle externo
         busqueda:
         for (int i = 0; i < numFilas; i++) {
             for (int j = 0; j < numColumnas; j++) {
+                if (i == 2 && j == 2) continue; // Ignorar centro
                 
-                // Evita la casilla "Free"
-                if (i == 2 && j == 2) {
-                    continue;
-                }
-                
-                // ⭐ LÓGICA DE MARCADO: Busca el botón y cambia su color
-                if (btn[i][j] != null && btn[i][j].getText().equals(numStr)) {
-                    btn[i][j].setBackground(COLOR_MARCADO); // Fondo ROJO
-                    btn[i][j].setForeground(COLOR_TEXTO_MARCADO); // Texto BLANCO para contraste
-                    break busqueda; // Terminar la búsqueda una vez encontrado
+                // Comparamos el texto actual del JLabel (que debe ser el número)
+                if (lbl[i][j].getText().equals(numStr)) {
+                    // Ahora el cambio de color es CONFIABLE
+                    lbl[i][j].setBackground(COLOR_MARCADO); 
+                    lbl[i][j].setForeground(COLOR_TEXTO_MARCADO); // Texto blanco
+                    lbl[i][j].repaint(); // Forzar repintado
+                    break busqueda; 
                 }
             }
         }
     }
     
-    // Método que parece ser para pruebas, lo mantengo pero no es esencial para el flujo MVC.
-    public void cambiarColorRojo() {
-        this.setBackground(Color.RED);
-        this.revalidate();
+    // =========================================================================
+    // MÉTODO PARA MOSTRAR CARTÓN (PERSISTENCIA AL CAMBIAR DE CARTÓN)
+    // =========================================================================
+    /**
+     * Carga el cartón con los números y marcas persistentes.
+     */
+    public void mostrarCarton(int[][] numeros, boolean[][] marcados) {
+        for (int i = 0; i < numFilas; i++) {
+            for (int j = 0; j < numColumnas; j++) {
+                JLabel etiqueta = lbl[i][j];
+
+                if (i == 2 && j == 2) continue; // Saltamos el centro
+
+                int numero = numeros[i][j];
+                String numStr = String.valueOf(numero);
+                
+                etiqueta.setText(numStr);
+                
+                if (marcados[i][j]) {
+                    // Aplicar el marcado (el JLabel lo acepta sin problema)
+                    etiqueta.setBackground(COLOR_MARCADO);
+                    etiqueta.setForeground(COLOR_TEXTO_MARCADO);
+                } else {
+                    // Estado normal
+                    etiqueta.setBackground(COLOR_FONDO_NORMAL);
+                    etiqueta.setForeground(COLOR_TEXTO_NORMAL);
+                }
+            }
+        }
         this.repaint();
     }
+
+    public void limpiarCarton() {
+        for (int i = 0; i < numFilas; i++) {
+            for (int j = 0; j < numColumnas; j++) {
+                if (i == 2 && j == 2) {
+                    configurarCasillaCentral();
+                } else {
+                    lbl[i][j].setText("");
+                    lbl[i][j].setForeground(COLOR_TEXTO_NORMAL);
+                    lbl[i][j].setBackground(COLOR_FONDO_NORMAL);
+                }
+            }
+        }
+}
+// Código en PanelTablero.java (ya existente en tu código)
+public void marcarNumero(int numero) {
+    if (numero >= 1 && numero <= 75) {
+        javax.swing.JPanel panel = panelesMarcador[numero - 1];
+        if (panel != null) {
+            panel.setBackground(COLOR_MARCADO); // Marcar con rojo
+            
+            // Asegurar que el texto dentro del JLabel sea blanco para contraste
+            for (Component component : panel.getComponents()) {
+                if (component instanceof JLabel jLabel) {
+                    jLabel.setForeground(Color.WHITE);
+                    break; 
+                }
+            }
+        }
+    }
+}
+    // Métodos Getter
+    public JLabel getLabel(int i, int j) {
+        return lbl[i][j];
+    }
+    
+    // El resto de código generado por NetBeans debe estar aquí...
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">...</editor-fold>
+    // ...
 /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
