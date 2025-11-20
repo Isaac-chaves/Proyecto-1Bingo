@@ -70,7 +70,7 @@ public int sacarNumeroAutomatico() {
 }
     
    
-public void verificarGanadores() {
+private void verificarGanadores() {
    for (Carton carton : cartones) {
       if (estrategiaActual.verificarVictoria(carton)) {
            cartonGanador = carton;

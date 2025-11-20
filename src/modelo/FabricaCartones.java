@@ -47,7 +47,7 @@ public class FabricaCartones {
             }
         }
         
-        return new Carton(id);
+        return new Carton(id, numerosIngresados);
     }
     
 public Carton crearCartonAutomatico(String id) {
@@ -59,20 +59,20 @@ public Carton crearCartonAutomatico(String id) {
             }
         }
         numeros[2][2] = 0;
-        return new Carton(id);
+        return new Carton(id, numeros);
     }
     
   
 private List<Integer> generarNumerosParaColumna(int columna) {
     int min = getMinimoColumna(columna);
     int max = getMaximoColumna(columna);
-          List<Integer> todosLosNumeros = new ArrayList<>();
-        for (int i = min; i <= max; i++) {
-            todosLosNumeros.add(i);
-        }
-        Collections.shuffle(todosLosNumeros, random);
-        return new ArrayList<>(todosLosNumeros.subList(0, 5));
+    List<Integer> todosLosNumeros = new ArrayList<>();
+    for (int i = min; i <= max; i++) {
+        todosLosNumeros.add(i); // <-- Corregido: un solo "Los"
     }
+    Collections.shuffle(todosLosNumeros, random);
+    return new ArrayList<>(todosLosNumeros.subList(0, 5));
+}
     
 private boolean estaDuplicado(int[][] matriz, int filaActual, int colActual, int numeroBuscado) {
     for (int fila = 0; fila < 5; fila++) {
@@ -146,5 +146,4 @@ private int getMaximoColumna(int columna) {
         
         return true;
     }
-}
-
+} // Aquí termina la clase FabricaCartones

@@ -41,6 +41,10 @@ public class TableroNumeros {
         return true;
     }
 
+    public Set<Integer> getNumerosCantados() {
+        return new HashSet<>(numerosCantados);
+    }
+
     public void reiniciar() {
         numerosCantados.clear();
         ultimoNumero = null;

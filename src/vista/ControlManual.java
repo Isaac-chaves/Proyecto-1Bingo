@@ -1,8 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
- */
 package vista;
+
+import java.awt.Frame;
+import javax.swing.JOptionPane;
+import modelo.Carton; // Asume que tienes una clase Carton en modelo
+import java.awt.Color;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -10,14 +13,121 @@ package vista;
  */
 public class ControlManual extends javax.swing.JDialog {
 
+    private Frame parentFrame;
+    private int[][] cartonManual;
+    private int indiceActual; // B, I, N, G, O (0 a 4)
+
     /**
      * Creates new form ControlManual
      */
     public ControlManual(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        this.parentFrame = parent;
+        inicializarManual();
+    }
+    
+    private void inicializarManual() {
+        this.cartonManual = new int[5][5];
+        this.indiceActual = 0; // Comienza con la columna 'B'
+        
+        // Inicializa el centro (N-3) como FREE (valor 0)
+        cartonManual[2][2] = 0;
+        
+        actualizarEtiquetaIndice();
+        previsualizarCarton();
+        jTextField1.setText("");
+    }
+    
+    private void actualizarEtiquetaIndice() {
+        String[] letras = {"B", "I", "N", "G", "O"};
+        indice.setText(letras[indiceActual] + "-" + (getFilaActual() + 1));
+    }
+    
+    private int getFilaActual() {
+        // Calcula la fila actual (0 a 4)
+        return (indiceActual < 2) ? indiceActual : (indiceActual < 5) ? indiceActual - 1 : indiceActual - 2;
+    }
+    
+    public int[][] obtenerCartonManual() {
+        return cartonManual;
+    }
+    
+    private void previsualizarCarton() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("B\tI\tN\tG\tO\n");
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                if (cartonManual[i][j] == 0) {
+                    if (i == 2 && j == 2) {
+                        sb.append("FREE\t");
+                    } else {
+                        sb.append("-\t");
+                    }
+                } else {
+                    sb.append(cartonManual[i][j]).append("\t");
+                }
+            }
+            sb.append("\n");
+        }
+        PrevisualizarMatriz.setText(sb.toString());
     }
 
+    private boolean validarNumero(int numero, int columna) {
+        // Rango de la columna B: 1-15 (col 0)
+        // Rango de la columna I: 16-30 (col 1)
+        // Rango de la columna N: 31-45 (col 2)
+        // Rango de la columna G: 46-60 (col 3)
+        // Rango de la columna O: 61-75 (col 4)
+        int min = columna * 15 + 1;
+        int max = (columna + 1) * 15;
+        
+        if (numero < min || numero > max) {
+            JOptionPane.showMessageDialog(this, 
+                    "El número " + numero + " está fuera del rango de la columna " + 
+                    getColumnaLetra(columna) + " (" + min + "-" + max + ").",
+                    "Error de Rango", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        // Validar que no esté repetido en la misma columna
+        for (int i = 0; i < 5; i++) {
+            if (i == 2 && columna == 2) continue; // Saltar el centro libre
+            if (cartonManual[i][columna] == numero) {
+                 JOptionPane.showMessageDialog(this, 
+                    "El número " + numero + " ya fue ingresado en la columna " + 
+                    getColumnaLetra(columna) + ".",
+                    "Número Repetido", JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
+    private String getColumnaLetra(int columna) {
+        String[] letras = {"B", "I", "N", "G", "O"};
+        return letras[columna];
+    }
+    
+    private void siguientePosicion() {
+        if (indiceActual == 2) {
+            // Saltar la posición central (N-3)
+            indiceActual++;
+        }
+        indiceActual++; // Mover a la siguiente posición
+        
+        if (indiceActual >= 25) {
+            // Finalizado el ingreso
+            JOptionPane.showMessageDialog(this, 
+                    "Ingreso de cartón finalizado. El cartón está listo para usarse.",
+                    "Cartón Completo", JOptionPane.INFORMATION_MESSAGE);
+            this.dispose(); // Cerrar el diálogo
+        } else {
+            actualizarEtiquetaIndice();
+            jTextField1.setText("");
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -104,7 +214,7 @@ public class ControlManual extends javax.swing.JDialog {
                         .addComponent(indice, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -128,7 +238,9 @@ public class ControlManual extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,17 +251,36 @@ public class ControlManual extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        
+        try {
+            int numero = Integer.parseInt(jTextField1.getText().trim());
+            int columna = indiceActual / 5;
+            int fila = indiceActual % 5;
+            
+            if (validarNumero(numero, columna)) {
+                cartonManual[fila][columna] = numero;
+                previsualizarCarton();
+                siguientePosicion();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, 
+                    "Debe ingresar un número entero válido.",
+                    "Error de Formato", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
+        
+        {//GEN-FIRST:event_jTextField1ActionPerformed
+        jButton1ActionPerformed(evt);
+        }//GEN-LAST:event_jTextField1ActionPerformed
+        
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -187,7 +318,6 @@ public class ControlManual extends javax.swing.JDialog {
             }
         });
     }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea PrevisualizarMatriz;
     private javax.swing.JLabel indice;

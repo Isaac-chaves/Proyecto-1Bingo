@@ -1,12 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vista;
 
 import java.awt.Color;
-import modelo.Carton;
-import modelo.JuegoBingo;
+import javax.swing.ImageIcon; 
+
 /**
  *
  * @author isaac
@@ -40,10 +36,86 @@ public void cambiarTema(boolean esOscuro) {
 
     jPanel1.setBackground(fondoPanel);
     Label_Resultado.setForeground(colorTexto);
-
+    
+    // Al cambiar el tema, volvemos a mostrar "0" por defecto y quitamos el icono
+    mostrarNumero(0); // Para resetear la etiqueta
+}
+/**
+ * Muestra el estado de ganador con un icono/texto especial.
+ * @param idGanador ID del cartón ganador
+ */
+public void mostrarGanador(String idGanador) {
+    Label_Resultado.setText("¡BINGO!");
+    Label_Resultado.setForeground(Color.RED);
+    // Opcional: mostrar el icono si existe
+    // mostrarIconoBingoWin();
+}
+    /**
+     * Muestra el número extraído en el centro del panel.
+     * Si es 0, muestra un valor por defecto (ej. "-") o el valor inicial.
+     * @param numero El número extraído (1 a 75) o 0 para limpiar.
+     */
+    public void mostrarNumero(int numero) {
+        if (numero >= 1 && numero <= 75) {
+            Label_Resultado.setText(String.valueOf(numero));
+            Label_Resultado.setIcon(null); // Asegura que no haya icono si se muestra un número
+        } else {
+            // Valor inicial o de reseteo
+            Label_Resultado.setText("-"); 
+            Label_Resultado.setIcon(null);
+        }
+    }
+    
+    /**
+     * Muestra el estado de ganador con un icono/texto especial.
+     * @param esGanador true si se debe mostrar el estado de ganador.
+     */
+    public void mostrarGanador(boolean esGanador) {
+        if (esGanador) {
+            // Ejemplo: Muestra "BINGO" y un icono (asume que tienes un recurso de imagen)
+            Label_Resultado.setText("BINGO!");
+            // Nota: Aquí se asume la existencia de un icono. Si no tienes uno, 
+            // simplemente usa el texto y cambia el color, por ejemplo:
+             Label_Resultado.setForeground(Color.RED);
+            // Label_Resultado.setIcon(new ImageIcon(getClass().getResource("/recursos/bingo_icon.png")));
+        } else {
+            // Si el estado de ganador se quita, se puede llamar a mostrarNumero(0) para resetear
+            mostrarNumero(0); 
+            // Asegura que el color de texto vuelva a la normalidad si se cambió
+             Label_Resultado.setForeground(Color.BLACK); // O el color de texto del tema actual
+        }
+    }
+/**
+ * Muestra el icono de la imagen "BingoWin.png" en el Label_Resultado.
+ * Elimina el texto actual del label.
+ */
+public void mostrarIconoBingoWin() {
+    try {
+        // *** CAMBIO DE RUTA AQUÍ ***
+        // Se asume que la imagen está en la carpeta "recursos" en la raíz del classpath
+        ImageIcon icono = new ImageIcon(getClass().getResource("recursos/BingoWin.png"));
+        
+        // Establece el icono en el JLabel
+        Label_Resultado.setIcon(icono);
+        
+        // Quita el texto para que solo se vea el icono
+        Label_Resultado.setText(""); 
+        
+        // Asegúrate de que el icono esté centrado si el tamaño del label es mayor que la imagen
+        Label_Resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Label_Resultado.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
+        
+    } catch (Exception e) {
+        // Manejo de error si la imagen no se encuentra (recurso nulo)
+        System.err.println("No se pudo cargar la imagen BingoWin.png. Revise la ruta /recursos/BingoWin.png. Error: " + e.getMessage());
+        Label_Resultado.setText("¡WIN!"); // Opcional: mostrar un mensaje alternativo
+        Label_Resultado.setIcon(null);
+    }
+    
     this.revalidate();
     this.repaint();
 }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -91,13 +163,7 @@ public void cambiarTema(boolean esOscuro) {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
-public void actualizarResultados(JuegoBingo juego) {
-    // Lógica para actualizar los resultados del juego
-}
 
-public void mostrarGanador(Carton ganador) {
-    // Lógica para mostrar el cartón ganador
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label_Resultado;

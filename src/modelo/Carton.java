@@ -14,7 +14,7 @@ public class Carton {
     private int[][] numeros;
     private boolean[][] marcados;
 
-    public Carton(String id) {
+    public Carton(String id, int[][] numeros) {
         this.id = id;
         this.numeros = numeros;
 
@@ -55,4 +55,4 @@ public class Carton {
         }
         marcados[2][2] = true;
     }
-} 
+}

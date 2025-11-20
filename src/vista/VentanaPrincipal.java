@@ -1,51 +1,35 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package vista;
 
 import controlador.ControladorBingo;
 
 /**
- *
+ * Ventana principal del juego de Bingo
  * @author isaac
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    private controlador.ControladorBingo controlador;
-    private vista.PanelResultado panelResultado;
-    private vista.PanelTablero panelTablero;
-    private vista.PanelCartones panelCartones;
     // Variables de los paneles a insertar
-  // Variables de los paneles a insertar
-private vista.PanelCartones panelCartones;
-private vista.PanelTablero panelTablero;
-private vista.PanelResultado panelResultado;
+    private vista.PanelCartones panelCartones;
+    private vista.PanelTablero panelTablero;
+    private vista.PanelResultado panelResultado;
+    
+    // ⭐ AGREGAR: Controlador MVC
+    private ControladorBingo controlador; // Variable agregada
+   
     public VentanaPrincipal() {
         initComponents();
         inicializarPaneles();
         configurarMenuTema();
-      aplicarTema(true);
-        configurarEventosControlador();
-        controlador = new controlador.ControladorBingo(this);
-        // Inicializar el controlador después de inicializar los paneles
-    }
-    private void configurarEventosControlador() {
-        // Configurar eventos que llaman a los métodos del controlador
-        botonCrear.addActionListener(e -> controlador.crearNuevoCarton());
-        BtnCarbiarCarton.addActionListener(e -> controlador.cambiarCarton(true));
-        jButton2.addActionListener(e -> controlador.reiniciarJuego());
-        btnRegresarCarton.addActionListener(e -> controlador.cambiarCarton(false));
+        aplicarTema(true);
         
-        jRadioButtonMenuItem1.addActionListener(e -> controlador.cambiarModoJuego("NORMAL"));
-        // Configurar eventos del menú de modos de juego
-        jRadioButtonMenuItem3.addActionListener(e -> controlador.cambiarModoJuego("CARTON_LLENO"));
-        jRadioButtonMenuItem2.addActionListener(e -> controlador.cambiarModoJuego("CUATRO_ESQUINAS"));
+        // ⭐ AGREGAR: Inicializar controlador
+        this.controlador = new ControladorBingo(this); // Inicializado
+        configurarEventos(); // Método agregado
     }
-    
 
     public void inicializarPaneles() {
         panelCartones = new vista.PanelCartones();
-        panelCartones.setBounds(0, 0, ContenedorCarton.getWidth(), ContenedorCarton.getHeight());
+        panelCartones.setBounds(0, 0, ContenedorCarton.getWidth(), 
+                                ContenedorCarton.getHeight());
         ContenedorCarton.add(panelCartones);
         
         panelTablero = new vista.PanelTablero();
@@ -55,119 +39,111 @@ private vista.PanelResultado panelResultado;
         panelResultado = new vista.PanelResultado();
         ContendorResultado.setLayout(new java.awt.BorderLayout());
         ContendorResultado.add(panelResultado, java.awt.BorderLayout.CENTER);
-        
-        this.revalidate();
-        this.repaint();
     }
     
-    panelTablero = new vista.PanelTablero(); //
-    contenedorTablero.setLayout(new java.awt.BorderLayout());
-    contenedorTablero.add(panelTablero, java.awt.BorderLayout.CENTER);
-    panelResultado = new vista.PanelResultado(); //
-    // Usamos BorderLayout para que el panel ocupe todo el JPanel ContendorResultado
-    ContendorResultado.setLayout(new java.awt.BorderLayout());
-    ContendorResultado.add(panelResultado, java.awt.BorderLayout.CENTER);
-    this.revalidate();
-    this.repaint();
-}
- 
-    // Dentro de la clase VentanaPrincipal:
-
-private void configurarMenuTema() {
-    // 1. Cambiar el texto de los elementos del menú
-        jMenu1.setText("Tema");
-    if (jMenu1 != null) {
+    /**
+     * Configura los ActionListeners y otros manejadores de eventos.
+     * El controlador será el encargado de añadir la lógica.
+     */
+    // ===========================================
+    // GETTERS PARA LOS PANELES Y CONTROLADOR
+    // ===========================================
+    
+    /**
+     * @return El panel que contiene los cartones.
+     */
+    public PanelCartones getPanelCartones() {
+        return panelCartones;
     }
-        jMenuItem1.setText("Tema Claro");
-    if (jMenuItem1 != null) {
-        // 2. Agregar ActionListener para Tema Claro
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aplicarTema(false); // false = Tema Claro
+
+    /**
+     * @return El panel que muestra el tablero de números llamados.
+     */
+    public PanelTablero getPanelTablero() {
+        return panelTablero;
+    }
+
+    /**
+     * @return El panel que muestra el último número extraído.
+     */
+    public PanelResultado getPanelResultado() {
+        return panelResultado;
+    }
+
+    /**
+     * @return El controlador del juego.
+     */
+    public ControladorBingo getControlador() {
+        return controlador;
+    }
+
+    // ===========================================
+    // GETTERS PARA COMPONENTES DE VISTAS (SI ES NECESARIO EN EL CONTROLADOR)
+    // ===========================================
+    
+    // ... (Puedes agregar getters para otros componentes como botonCrear, ComboModo, etc. si el controlador los necesita)
+    
+    
+    // --- MÉTODOS ADICIONALES DEL SNIPPET ---
+    public void configurarMenuTema() {
+        // Lógica de configuración de menú (no proporcionada)
+    }
+
+    public void aplicarTema(boolean esOscuro) {
+        // Lógica de aplicación de tema (no proporcionada)
+    }
+    public void actualizarLabelCarton(String texto) {
+        jLabel1.setText(texto);
+    }
+    /**
+ * Configura los ActionListeners y otros manejadores de eventos.
+ */
+private void configurarEventos() {
+    // Botón crear cartón
+    botonCrear.addActionListener(e -> {
+        String modo = (String) ComboModo.getSelectedItem();
+        if ("Manual".equals(modo)) {
+            // Abrir diálogo manual
+            ControlManual dialogo = new ControlManual(this, true);
+            dialogo.setVisible(true);
+            int[][] carton = dialogo.obtenerCartonManual();
+            if (carton != null) {
+                controlador.crearCartonManual(carton);
             }
-        });
-    }
-
-    if (jMenuItem2 != null) {
-        jMenuItem2.setText("Tema Oscuro");
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-        // 3. Agregar ActionListener para Tema Oscuro
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                aplicarTema(true); // true = Tema Oscuro
-        });
-            }
-    }
-}
-
-
-// En VentanaPrincipal.java
-   private void aplicarTema(boolean esOscuro) {
-
-    java.awt.Color fondoPrincipal;
-    java.awt.Color colorTexto;
+        } else {
+            controlador.crearCartonAutomatico();
+        }
+    });
     
-    if (esOscuro) {
-        // Tema Oscuro: Color base para la Ventana Principal
-        fondoPrincipal = new java.awt.Color(35, 38, 45); 
-        colorTexto = java.awt.Color.WHITE;
-    } else {
-        // Tema Claro: Color base para la Ventana Principal
-        colorTexto = java.awt.Color.BLACK;
-        fondoPrincipal = new java.awt.Color(230, 230, 230); 
-    }
-
-    // 1. Aplicar color a los contenedores de la Ventana Principal
-    // Al panel de contenido principal de la ventana
-    this.getContentPane().setBackground(fondoPrincipal);
+    // Botón cambiar cartón (adelante)
+    BtnCarbiarCarton.addActionListener(e -> controlador.siguienteCarton());
     
-    // A la barra de menú (jMenuBar1)
+    // Botón regresar cartón
+    btnRegresarCarton.addActionListener(e -> controlador.anteriorCarton());
     
-    if (jMenuBar1 != null) {
-        jMenuBar1.setForeground(colorTexto); // Cambia el color del texto del menú
-    }
-        jMenuBar1.setBackground(fondoPrincipal);
+    // Botón reiniciar
+    jButton2.addActionListener(e -> controlador.reiniciarJuego());
     
-    if (contenedorTablero != null) {
-    // A los JPanels y contenedores que rodean los paneles hijos:
-        contenedorTablero.setBackground(fondoPrincipal);
-    if (ContenedorCarton != null) {
-    }
-    }
-        ContenedorCarton.setBackground(fondoPrincipal);
-        ContendorResultado.setBackground(fondoPrincipal);
-    if (ContendorResultado != null) {
-    }
+    // Botón buscar
+    jButton1.addActionListener(e -> {
+        controlador.buscarCarton(jTextField1.getText());
+    });
     
-    if (jPanel1 != null) {
-    // Incluye cualquier otro JPanel de la Ventana Principal (jPanel1, jPanel2, etc.):
-        jPanel1.setBackground(fondoPrincipal);
-    if (jPanel2 != null) {
-    }
-        jPanel2.setBackground(fondoPrincipal);
-    }
-    }
-        jPanel3.setBackground(fondoPrincipal);
-    if (jPanel3 != null) {
-    if (jPanel4 != null) {
-        jPanel4.setBackground(fondoPrincipal);
-    }
-    if (jPanel5 != null) {
-        jPanel5.setBackground(fondoPrincipal);
-    }
+    // Campo de texto (Enter para buscar)
+    jTextField1.addActionListener(e -> {
+        controlador.buscarCarton(jTextField1.getText());
+    });
     
-    // 2. Llamar al método cambiarTema en cada panel hijo
-    if (panelCartones != null) {
-        panelCartones.cambiarTema(esOscuro);
-    if (panelTablero != null) {
-    }
-        panelTablero.cambiarTema(esOscuro);
-    }
-    if (panelResultado != null) {
-        panelResultado.cambiarTema(esOscuro);
-
-    }
-    this.revalidate();
-    this.repaint();
+   
+    
+    // Menú items de tema
+    jMenuItem1.addActionListener(e -> {
+        aplicarTema(true); // Tema oscuro
+    });
+    
+    jMenuItem2.addActionListener(e -> {
+        aplicarTema(false); // Tema claro
+    });
 }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -179,6 +155,10 @@ private void configurarMenuTema() {
     private void initComponents() {
 
         jPanel4 = new javax.swing.JPanel();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jPanel1 = new javax.swing.JPanel();
         ContenedorCarton = new javax.swing.JDesktopPane();
         contenedorTablero = new javax.swing.JPanel();
@@ -198,10 +178,10 @@ private void configurarMenuTema() {
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
-        jMenu2 = new javax.swing.JMenu();
-        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem2 = new javax.swing.JRadioButtonMenuItem();
-        jRadioButtonMenuItem3 = new javax.swing.JRadioButtonMenuItem();
+        CambiarmodeasNormal = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        CambiarmodeasEsquinas = new javax.swing.JMenuItem();
+        CambiarmodeCompleto = new javax.swing.JMenuItem();
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -213,6 +193,14 @@ private void configurarMenuTema() {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 100, Short.MAX_VALUE)
         );
+
+        jMenuItem4.setText("jMenuItem4");
+
+        jMenu2.setText("File");
+        jMenuBar2.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -422,36 +410,33 @@ private void configurarMenuTema() {
 
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Modo");
+        CambiarmodeasNormal.setText("Modo");
 
-        jRadioButtonMenuItem1.setSelected(true);
-        jRadioButtonMenuItem1.setText("Normal");
-        jRadioButtonMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem3.setText("Normal");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem1ActionPerformed(evt);
+                jMenuItem3ActionPerformed(evt);
             }
         });
-        jMenu2.add(jRadioButtonMenuItem1);
+        CambiarmodeasNormal.add(jMenuItem3);
 
-        jRadioButtonMenuItem2.setSelected(true);
-        jRadioButtonMenuItem2.setText("Cuatro Esquinas");
-        jRadioButtonMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        CambiarmodeasEsquinas.setText("Cuatro esquinas");
+        CambiarmodeasEsquinas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem2ActionPerformed(evt);
+                CambiarmodeasEsquinasActionPerformed(evt);
             }
         });
-        jMenu2.add(jRadioButtonMenuItem2);
+        CambiarmodeasNormal.add(CambiarmodeasEsquinas);
 
-        jRadioButtonMenuItem3.setSelected(true);
-        jRadioButtonMenuItem3.setText("Completo");
-        jRadioButtonMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        CambiarmodeCompleto.setText("Completo");
+        CambiarmodeCompleto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButtonMenuItem3ActionPerformed(evt);
+                CambiarmodeCompletoActionPerformed(evt);
             }
         });
-        jMenu2.add(jRadioButtonMenuItem3);
+        CambiarmodeasNormal.add(CambiarmodeCompleto);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(CambiarmodeasNormal);
 
         setJMenuBar(jMenuBar1);
 
@@ -494,16 +479,6 @@ private void configurarMenuTema() {
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
        
-             String modoSeleccionado = (String) ComboModo.getSelectedItem();
-        if ("Manual".equals(modoSeleccionado)) {
-            vista.ControlManual controlManualDialog = new vista.ControlManual(this, true);
-            controlManualDialog.setLocationRelativeTo(this);
-            controlManualDialog.setVisible(true);
- 
-        } else if ("Automatico".equals(modoSeleccionado)) {
-  
-        }
-        
     }//GEN-LAST:event_botonCrearActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -513,7 +488,7 @@ private void configurarMenuTema() {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
+public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -536,9 +511,7 @@ private void configurarMenuTema() {
             java.util.logging.Logger.getLogger(VentanaPrincipal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
 
-        /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new VentanaPrincipal().setVisible(true);
@@ -548,6 +521,9 @@ private void configurarMenuTema() {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCarbiarCarton;
+    private javax.swing.JMenuItem CambiarmodeCompleto;
+    private javax.swing.JMenuItem CambiarmodeasEsquinas;
+    private javax.swing.JMenu CambiarmodeasNormal;
     private javax.swing.JComboBox<String> ComboModo;
     private javax.swing.JPanel ContendorResultado;
     private javax.swing.JDesktopPane ContenedorCarton;
@@ -559,17 +535,18 @@ private void configurarMenuTema() {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
-    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
     private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

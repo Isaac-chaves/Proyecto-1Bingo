@@ -5,7 +5,6 @@
 package vista;
 
 import java.awt.Color;
-import modelo.Carton;
 
 /**
  *
@@ -53,7 +52,97 @@ public class PanelCartones extends javax.swing.JPanel {
 
         this.repaint(); // Fuerza el repintado del panel para mostrar el color
     }
+/**
+ * Limpia el cartón mostrando valores por defecto
+ */
+public void limpiarCarton() {
+    javax.swing.JLabel[] etiquetas = {
+        ContenedorNumCarton1, ContenedorNumCarton2, ContenedorNumCarton3, 
+        ContenedorNumCarton4, ContenedorNumCarton5, ContenedorNumCarton6,
+        ContenedorNumCarton7, ContenedorNumCarton8, ContenedorNumCarton9, 
+        ContenedorNumCarton10, ContenedorNumCarton11, ContenedorNumCarton12,
+        ContenedorNumCarton13, ContenedorNumCarton14, ContenedorNumCarton15,
+        ContenedorNumCarton16, ContenedorNumCarton17, ContenedorNumCarton18,
+        ContenedorNumCarton19, ContenedorNumCarton20, ContenedorNumCarton21,
+        ContenedorNumCarton22, ContenedorNumCarton23, ContenedorNumCarton24,
+        ContenedorNumCarton25
+    };
+    
+    javax.swing.JPanel[] paneles = {
+        CartonCambiacolor1, CartonCambiacolor2, CartonCambiacolor3,
+        CartonCambiacolor4, CartonCambiacolor5, CartonCambiacolor6,
+        CartonCambiacolor7, CartonCambiacolor8, CartonCambiacolor9,
+        CartonCambiacolor10, CartonCambiacolor11, CartonCambiacolor12,
+        CartonCambiacolor13, CartonCambiacolor14, CartonCambiacolor15,
+        CartonCambiacolor16, CartonCambiacolor17, CartonCambiacolor18,
+        CartonCambiacolor19, CartonCambiacolor20, CartonCambiacolor21,
+        CartonCambiacolor22, CartonCambiacolor23, CartonCambiacolor24,
+        CartonCambiacolor25
+    };
+    
+    for (int i = 0; i < etiquetas.length; i++) {
+        if (i == 12) { // Posición central
+            etiquetas[i].setText("Free");
+        } else {
+            etiquetas[i].setText("0");
+        }
+        paneles[i].setBackground(Color.WHITE);
+    }
+    
+    this.repaint();
+}
 
+/**
+ * Muestra un cartón con sus números y marcas
+ */
+public void mostrarCarton(int[][] numeros, boolean[][] marcados) {
+    javax.swing.JLabel[] etiquetas = {
+        ContenedorNumCarton1, ContenedorNumCarton2, ContenedorNumCarton3, 
+        ContenedorNumCarton4, ContenedorNumCarton5, ContenedorNumCarton6,
+        ContenedorNumCarton7, ContenedorNumCarton8, ContenedorNumCarton9, 
+        ContenedorNumCarton10, ContenedorNumCarton11, ContenedorNumCarton12,
+        ContenedorNumCarton13, ContenedorNumCarton14, ContenedorNumCarton15,
+        ContenedorNumCarton16, ContenedorNumCarton17, ContenedorNumCarton18,
+        ContenedorNumCarton19, ContenedorNumCarton20, ContenedorNumCarton21,
+        ContenedorNumCarton22, ContenedorNumCarton23, ContenedorNumCarton24,
+        ContenedorNumCarton25
+    };
+    
+    javax.swing.JPanel[] paneles = {
+        CartonCambiacolor1, CartonCambiacolor2, CartonCambiacolor3,
+        CartonCambiacolor4, CartonCambiacolor5, CartonCambiacolor6,
+        CartonCambiacolor7, CartonCambiacolor8, CartonCambiacolor9,
+        CartonCambiacolor10, CartonCambiacolor11, CartonCambiacolor12,
+        CartonCambiacolor13, CartonCambiacolor14, CartonCambiacolor15,
+        CartonCambiacolor16, CartonCambiacolor17, CartonCambiacolor18,
+        CartonCambiacolor19, CartonCambiacolor20, CartonCambiacolor21,
+        CartonCambiacolor22, CartonCambiacolor23, CartonCambiacolor24,
+        CartonCambiacolor25
+    };
+    
+    int idx = 0;
+    for (int fila = 0; fila < 5; fila++) {
+        for (int col = 0; col < 5; col++) {
+            // Posición central (FREE)
+            if (fila == 2 && col == 2) {
+                etiquetas[idx].setText("Free");
+            } else {
+                etiquetas[idx].setText(String.valueOf(numeros[fila][col]));
+            }
+            
+            // Marcar si está marcado
+            if (marcados[fila][col]) {
+                paneles[idx].setBackground(Color.RED);
+                etiquetas[idx].setForeground(Color.WHITE);
+            } else {
+                paneles[idx].setBackground(Color.WHITE);
+                etiquetas[idx].setForeground(Color.BLACK);
+            }
+            idx++;
+        }
+    }
+    this.repaint();
+}
 // Dentro de la clase PanelCartones:
 /**
  * Cambia el tema de color para los paneles de cartones.
@@ -190,7 +279,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton1.setText("0");
+        ContenedorNumCarton1.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor1Layout = new javax.swing.GroupLayout(CartonCambiacolor1);
         CartonCambiacolor1.setLayout(CartonCambiacolor1Layout);
@@ -211,7 +300,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton2.setText("0");
+        ContenedorNumCarton2.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor2Layout = new javax.swing.GroupLayout(CartonCambiacolor2);
         CartonCambiacolor2.setLayout(CartonCambiacolor2Layout);
@@ -232,7 +321,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton3.setText("0");
+        ContenedorNumCarton3.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor3Layout = new javax.swing.GroupLayout(CartonCambiacolor3);
         CartonCambiacolor3.setLayout(CartonCambiacolor3Layout);
@@ -253,7 +342,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton4.setText("0");
+        ContenedorNumCarton4.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor4Layout = new javax.swing.GroupLayout(CartonCambiacolor4);
         CartonCambiacolor4.setLayout(CartonCambiacolor4Layout);
@@ -274,7 +363,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton5.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton5.setText("0");
+        ContenedorNumCarton5.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor5Layout = new javax.swing.GroupLayout(CartonCambiacolor5);
         CartonCambiacolor5.setLayout(CartonCambiacolor5Layout);
@@ -295,7 +384,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton6.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton6.setText("0");
+        ContenedorNumCarton6.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor6Layout = new javax.swing.GroupLayout(CartonCambiacolor6);
         CartonCambiacolor6.setLayout(CartonCambiacolor6Layout);
@@ -316,7 +405,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton7.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton7.setText("0");
+        ContenedorNumCarton7.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor7Layout = new javax.swing.GroupLayout(CartonCambiacolor7);
         CartonCambiacolor7.setLayout(CartonCambiacolor7Layout);
@@ -337,7 +426,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton8.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton8.setText("0");
+        ContenedorNumCarton8.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor8Layout = new javax.swing.GroupLayout(CartonCambiacolor8);
         CartonCambiacolor8.setLayout(CartonCambiacolor8Layout);
@@ -358,7 +447,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton9.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton9.setText("0");
+        ContenedorNumCarton9.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor9Layout = new javax.swing.GroupLayout(CartonCambiacolor9);
         CartonCambiacolor9.setLayout(CartonCambiacolor9Layout);
@@ -379,7 +468,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton10.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton10.setText("0");
+        ContenedorNumCarton10.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor10Layout = new javax.swing.GroupLayout(CartonCambiacolor10);
         CartonCambiacolor10.setLayout(CartonCambiacolor10Layout);
@@ -400,7 +489,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton11.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton11.setText("0");
+        ContenedorNumCarton11.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor11Layout = new javax.swing.GroupLayout(CartonCambiacolor11);
         CartonCambiacolor11.setLayout(CartonCambiacolor11Layout);
@@ -421,7 +510,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton12.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton12.setText("0");
+        ContenedorNumCarton12.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor12Layout = new javax.swing.GroupLayout(CartonCambiacolor12);
         CartonCambiacolor12.setLayout(CartonCambiacolor12Layout);
@@ -442,7 +531,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton13.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton13.setText("0");
+        ContenedorNumCarton13.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor13Layout = new javax.swing.GroupLayout(CartonCambiacolor13);
         CartonCambiacolor13.setLayout(CartonCambiacolor13Layout);
@@ -463,35 +552,35 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton14.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton14.setText("Free");
+        ContenedorNumCarton14.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor14Layout = new javax.swing.GroupLayout(CartonCambiacolor14);
         CartonCambiacolor14.setLayout(CartonCambiacolor14Layout);
         CartonCambiacolor14Layout.setHorizontalGroup(
             CartonCambiacolor14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CartonCambiacolor14Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
+                .addGap(30, 30, 30)
                 .addComponent(ContenedorNumCarton14)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         CartonCambiacolor14Layout.setVerticalGroup(
             CartonCambiacolor14Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CartonCambiacolor14Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(16, 16, 16)
                 .addComponent(ContenedorNumCarton14)
-                .addContainerGap(17, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         ContenedorNumCarton15.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton15.setText("0");
+        ContenedorNumCarton15.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor15Layout = new javax.swing.GroupLayout(CartonCambiacolor15);
         CartonCambiacolor15.setLayout(CartonCambiacolor15Layout);
         CartonCambiacolor15Layout.setHorizontalGroup(
             CartonCambiacolor15Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(CartonCambiacolor15Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
+                .addGap(35, 35, 35)
                 .addComponent(ContenedorNumCarton15)
                 .addContainerGap(29, Short.MAX_VALUE))
         );
@@ -505,7 +594,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton16.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton16.setText("0");
+        ContenedorNumCarton16.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor16Layout = new javax.swing.GroupLayout(CartonCambiacolor16);
         CartonCambiacolor16.setLayout(CartonCambiacolor16Layout);
@@ -526,7 +615,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton17.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton17.setText("0");
+        ContenedorNumCarton17.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor17Layout = new javax.swing.GroupLayout(CartonCambiacolor17);
         CartonCambiacolor17.setLayout(CartonCambiacolor17Layout);
@@ -547,7 +636,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton18.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton18.setText("0");
+        ContenedorNumCarton18.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor18Layout = new javax.swing.GroupLayout(CartonCambiacolor18);
         CartonCambiacolor18.setLayout(CartonCambiacolor18Layout);
@@ -568,7 +657,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton19.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton19.setText("0");
+        ContenedorNumCarton19.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor19Layout = new javax.swing.GroupLayout(CartonCambiacolor19);
         CartonCambiacolor19.setLayout(CartonCambiacolor19Layout);
@@ -589,7 +678,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton20.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton20.setText("0");
+        ContenedorNumCarton20.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor20Layout = new javax.swing.GroupLayout(CartonCambiacolor20);
         CartonCambiacolor20.setLayout(CartonCambiacolor20Layout);
@@ -610,7 +699,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton21.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton21.setText("0");
+        ContenedorNumCarton21.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor21Layout = new javax.swing.GroupLayout(CartonCambiacolor21);
         CartonCambiacolor21.setLayout(CartonCambiacolor21Layout);
@@ -631,7 +720,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton22.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton22.setText("0");
+        ContenedorNumCarton22.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor22Layout = new javax.swing.GroupLayout(CartonCambiacolor22);
         CartonCambiacolor22.setLayout(CartonCambiacolor22Layout);
@@ -652,7 +741,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton23.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton23.setText("0");
+        ContenedorNumCarton23.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor23Layout = new javax.swing.GroupLayout(CartonCambiacolor23);
         CartonCambiacolor23.setLayout(CartonCambiacolor23Layout);
@@ -673,7 +762,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton24.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton24.setText("0");
+        ContenedorNumCarton24.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor24Layout = new javax.swing.GroupLayout(CartonCambiacolor24);
         CartonCambiacolor24.setLayout(CartonCambiacolor24Layout);
@@ -694,7 +783,7 @@ public void cambiarTema(boolean esOscuro) {
 
         ContenedorNumCarton25.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton25.setText("0");
+        ContenedorNumCarton25.setText("-");
 
         javax.swing.GroupLayout CartonCambiacolor25Layout = new javax.swing.GroupLayout(CartonCambiacolor25);
         CartonCambiacolor25.setLayout(CartonCambiacolor25Layout);
@@ -717,12 +806,8 @@ public void cambiarTema(boolean esOscuro) {
         FondoCarton.setLayout(FondoCartonLayout);
         FondoCartonLayout.setHorizontalGroup(
             FondoCartonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FondoCartonLayout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(IconBingoSuperior)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoCartonLayout.createSequentialGroup()
-                .addContainerGap(34, Short.MAX_VALUE)
+                .addContainerGap(49, Short.MAX_VALUE)
                 .addGroup(FondoCartonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(CartonCambiacolor20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CartonCambiacolor15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -776,6 +861,10 @@ public void cambiarTema(boolean esOscuro) {
                                 .addGap(18, 18, 18)
                                 .addComponent(CartonCambiacolor10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(62, 62, 62))
+            .addGroup(FondoCartonLayout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(IconBingoSuperior)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         FondoCartonLayout.setVerticalGroup(
             FondoCartonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -843,13 +932,7 @@ public void cambiarTema(boolean esOscuro) {
     private void IconBingoSuperiorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_IconBingoSuperiorAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_IconBingoSuperiorAncestorAdded
-public void mostrarCarton(Carton carton) {
-    // Lógica para mostrar un cartón específico
-}
 
-public void limpiarCarton() {
-    // Lógica para limpiar la visualización del cartón
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CartonCambiacolor1;

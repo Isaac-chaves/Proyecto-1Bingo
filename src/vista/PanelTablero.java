@@ -5,20 +5,27 @@
 package vista;
 
 import java.awt.Color;
-import modelo.TableroNumeros;
+
 /**
  *
  * @author isaac
  */
 public class PanelTablero extends javax.swing.JPanel {
-private final javax.swing.JPanel[] panelesMarcador = new javax.swing.JPanel[75];
+    
+    // El array de paneles ya estaba declarado en el snippet
+    private final javax.swing.JPanel[] panelesMarcador = new javax.swing.JPanel[75];
+    
+    private static final Color COLOR_MARCADO = Color.GREEN;
+    private static final Color COLOR_POR_DEFECTO = Color.LIGHT_GRAY;
+
     /**
      * Creates new form PanelTablero
      */
     public PanelTablero() {
         initComponents();
         inicializarPanelesMarcador();
-    } 
+        reiniciarTablero(); // Llamar para asegurar el color inicial
+    }
 private void inicializarPanelesMarcador() {
     // Inicialización de la lista de paneles para acceso por índice (0-74)
     panelesMarcador[0] = panelMarcador_1;
@@ -98,6 +105,33 @@ private void inicializarPanelesMarcador() {
     panelesMarcador[74] = panelMarcador_75;
     
 }
+
+public void marcarNumero(int numero) {
+        if (numero >= 1 && numero <= 75) {
+            // El índice del array es 'numero - 1'
+            panelesMarcador[numero - 1].setBackground(COLOR_MARCADO);
+        }
+    }
+
+    /**
+     * Desmarca visualmente el número en el tablero (vuelve al color por defecto).
+     * @param numero El número a desmarcar (1 a 75).
+     */
+    public void desmarcarNumero(int numero) {
+        if (numero >= 1 && numero <= 75) {
+            // El índice del array es 'numero - 1'
+            panelesMarcador[numero - 1].setBackground(COLOR_POR_DEFECTO);
+        }
+    }
+    
+    /**
+     * Reinicia el tablero desmarcando todos los números.
+     */
+    public void reiniciarTablero() {
+        for (int i = 0; i < 75; i++) {
+            panelesMarcador[i].setBackground(COLOR_POR_DEFECTO);
+        }
+    }
 public void cambiarTema(boolean esOscuro) {
     // Definición de colores
     Color fondoTableroPrincipal;
@@ -2040,9 +2074,6 @@ public void cambiarTema(boolean esOscuro) {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-public void actualizarTablero(TableroNumeros tablero) {
-    // Lógica para actualizar el tablero con los números marcados
-}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Num_1;
