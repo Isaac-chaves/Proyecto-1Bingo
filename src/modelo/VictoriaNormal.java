@@ -53,5 +53,8 @@ public class VictoriaNormal implements EstrategiaVictoria {
         }
         if (diag1 || diag2) {
             return true;
-
         }
+
+        return false; // ya no se incluye la verificación de las 4 esquinas
+    }
+} 
