@@ -4,6 +4,8 @@
  */
 package vista;
 
+import modelo.TableroNumeros;
+
 /**
  *
  * @author isaac
@@ -1988,6 +1990,9 @@ private void inicializarPanelesMarcador() {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+public void actualizarTablero(TableroNumeros tablero) {
+    // Lógica para actualizar el tablero con los números marcados
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Num_1;

@@ -47,7 +47,7 @@ public class FabricaCartones {
             }
         }
         
-        return new Carton(id, numerosIngresados);
+        return new Carton(id);
     }
     
 public Carton crearCartonAutomatico(String id) {
@@ -59,7 +59,7 @@ public Carton crearCartonAutomatico(String id) {
             }
         }
         numeros[2][2] = 0;
-        return new Carton(id, numeros);
+        return new Carton(id);
     }
     
   

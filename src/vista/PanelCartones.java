@@ -5,6 +5,7 @@
 package vista;
 
 import java.awt.Color;
+import modelo.Carton;
 
 /**
  *
@@ -782,7 +783,13 @@ public class PanelCartones extends javax.swing.JPanel {
     private void IconBingoSuperiorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_IconBingoSuperiorAncestorAdded
         // TODO add your handling code here:
     }//GEN-LAST:event_IconBingoSuperiorAncestorAdded
+public void mostrarCarton(Carton carton) {
+    // Lógica para mostrar un cartón específico
+}
 
+public void limpiarCarton() {
+    // Lógica para limpiar la visualización del cartón
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel CartonCambiacolor1;

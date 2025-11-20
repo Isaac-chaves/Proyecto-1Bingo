@@ -4,40 +4,90 @@
  */
 package vista;
 
+import controlador.ControladorBingo;
+
 /**
  *
  * @author isaac
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-  // Variables de los paneles a insertar
-private vista.PanelCartones panelCartones;
-private vista.PanelTablero panelTablero;
-private vista.PanelResultado panelResultado;
+    // Variables de los paneles a insertar
+    private vista.PanelCartones panelCartones;
+    private vista.PanelTablero panelTablero;
+    private vista.PanelResultado panelResultado;
+    private controlador.ControladorBingo controlador;
+    
     /**
      * Creates new form NewJFrame
      */
     public VentanaPrincipal() {
         initComponents();
         inicializarPaneles();
+        // Inicializar el controlador después de inicializar los paneles
+        controlador = new controlador.ControladorBingo(this);
+        configurarEventosControlador();
     }
-
+    
+    private void configurarEventosControlador() {
+        // Configurar eventos que llaman a los métodos del controlador
+        botonCrear.addActionListener(e -> controlador.crearNuevoCarton());
+        jButton2.addActionListener(e -> controlador.reiniciarJuego());
+        BtnCarbiarCarton.addActionListener(e -> controlador.cambiarCarton(true));
+        btnRegresarCarton.addActionListener(e -> controlador.cambiarCarton(false));
+        
+        // Configurar eventos del menú de modos de juego
+        jRadioButtonMenuItem1.addActionListener(e -> controlador.cambiarModoJuego("NORMAL"));
+        jRadioButtonMenuItem2.addActionListener(e -> controlador.cambiarModoJuego("CUATRO_ESQUINAS"));
+        jRadioButtonMenuItem3.addActionListener(e -> controlador.cambiarModoJuego("CARTON_LLENO"));
+    }
     
     public void inicializarPaneles() {
-    panelCartones = new vista.PanelCartones(); //
-    panelCartones.setBounds(0, 0, ContenedorCarton.getWidth(), ContenedorCarton.getHeight());
-    ContenedorCarton.add(panelCartones);
+        panelCartones = new vista.PanelCartones();
+        panelCartones.setBounds(0, 0, ContenedorCarton.getWidth(), ContenedorCarton.getHeight());
+        ContenedorCarton.add(panelCartones);
+        
+        panelTablero = new vista.PanelTablero();
+        contenedorTablero.setLayout(new java.awt.BorderLayout());
+        contenedorTablero.add(panelTablero, java.awt.BorderLayout.CENTER);
+        
+        panelResultado = new vista.PanelResultado();
+        ContendorResultado.setLayout(new java.awt.BorderLayout());
+        ContendorResultado.add(panelResultado, java.awt.BorderLayout.CENTER);
+        
+        this.revalidate();
+        this.repaint();
+    }
     
-    panelTablero = new vista.PanelTablero(); //
-    contenedorTablero.setLayout(new java.awt.BorderLayout());
-    contenedorTablero.add(panelTablero, java.awt.BorderLayout.CENTER);
-    panelResultado = new vista.PanelResultado(); //
-    // Usamos BorderLayout para que el panel ocupe todo el JPanel ContendorResultado
-    ContendorResultado.setLayout(new java.awt.BorderLayout());
-    ContendorResultado.add(panelResultado, java.awt.BorderLayout.CENTER);
-    this.revalidate();
-    this.repaint();
-}
+    // Métodos públicos para que el controlador acceda a los componentes
+    public String getModoSeleccionado() {
+        return (String) ComboModo.getSelectedItem();
+    }
     
+    public void actualizarIndicadorCarton(String texto) {
+        jLabel1.setText("Cartón = " + texto);
+    }
+    
+    public void actualizarEstadoBotonesNavegacion(boolean habilitado) {
+        BtnCarbiarCarton.setEnabled(habilitado);
+        btnRegresarCarton.setEnabled(habilitado);
+    }
+    
+    // Getters para los paneles
+    public PanelCartones getPanelCartones() {
+        return panelCartones;
+    }
+    
+    public PanelTablero getPanelTablero() {
+        return panelTablero;
+    }
+    
+    public PanelResultado getPanelResultado() {
+        return panelResultado;
+    }
+    
+    public controlador.ControladorBingo getControlador() {
+        return controlador;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

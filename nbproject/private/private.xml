@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/NewClass.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/controlador/NewClass.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/Carton.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/EstrategiaVictoria.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/TableroNumeros.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/Tombola.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/VictoriaCartonLleno.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/VictoriaCuatroEsquinas.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/VictoriaNormal.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/FabricaCartones.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/vista/PanelCartones.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/vista/PanelResultado.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/vista/PanelTablero.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/vista/VentanaPrincipal.java</file>
+            <file>file:/C:/Users/UTN/Documents/NetBeansProjects/Proyecto-1Bingo/src/modelo/JuegoBingo.java</file>
+        </group>
+    </open-files>
+</project-private>

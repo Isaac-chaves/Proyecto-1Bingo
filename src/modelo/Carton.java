@@ -14,7 +14,7 @@ public class Carton {
     private int[][] numeros;
     private boolean[][] marcados;
 
-    public Carton(String id, int[][] numeros) {
+    public Carton(String id) {
         this.id = id;
         this.numeros = numeros;
 

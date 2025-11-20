@@ -4,6 +4,9 @@
  */
 package vista;
 
+import modelo.Carton;
+import modelo.JuegoBingo;
+
 /**
  *
  * @author isaac
@@ -63,7 +66,13 @@ public class PanelResultado extends javax.swing.JPanel {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+public void actualizarResultados(JuegoBingo juego) {
+    // Lógica para actualizar los resultados del juego
+}
 
+public void mostrarGanador(Carton ganador) {
+    // Lógica para mostrar el cartón ganador
+}
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Label_Resultado;
