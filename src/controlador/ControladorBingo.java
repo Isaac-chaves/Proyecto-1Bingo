@@ -238,24 +238,32 @@ public void generarNumeroAutomatico() {
     /**
      * Reinicia el juego completamente
      */
-    public void reiniciarJuego() {
-        int respuesta = JOptionPane.showConfirmDialog(ventanaPrincipal, 
-            "¿Está seguro que desea reiniciar el juego?\nSe mantendrán los cartones creados.", 
-            "Confirmar reinicio", JOptionPane.YES_NO_OPTION);
-            
-        if (respuesta == JOptionPane.YES_OPTION) {
-            juegoBingo.reiniciarJuego();
-            juegoEnCurso = false;
-            
-            actualizarVistaTablero();
-            actualizarVistaCarton();
-            panelResultado.mostrarNumero(0);
-            
-            JOptionPane.showMessageDialog(ventanaPrincipal, 
-                "Juego reiniciado correctamente", 
-                "Reinicio", JOptionPane.INFORMATION_MESSAGE);
-        }
-    }
+     public void reiniciarJuego() {
+     int respuesta = JOptionPane.showConfirmDialog(ventanaPrincipal,
+             "¿Está seguro que desea reiniciar el juego?\nSe borrarán los cartones creados.",
+             "Confirmar reinicio", JOptionPane.YES_NO_OPTION);
+
+     if (respuesta == JOptionPane.YES_OPTION) {
+         juegoBingo.reiniciarJuego(); // Borra los cartones del Modelo (Juego)
+         
+         // ⭐ LÍNEA AGREGADA: Limpia la visualización de cartones en la Interfaz
+         ventanaPrincipal.getPanelCartones().limpiarCarton(); // ¡Asegúrate de que 'ventanaPrincipal' sea accesible aquí!
+         
+         juegoBingo.cambiarEstrategiaVictoria("NORMAL");
+         juegoEnCurso = false;
+         indiceCartonActual = 0; // Vuelve al primer cartón
+
+         actualizarVistaTablero();
+         actualizarVistaCarton();
+         actualizarLabelCarton();
+         panelResultado.mostrarNumero(0);
+         panelResultado.limpiarGanador();
+
+         JOptionPane.showMessageDialog(ventanaPrincipal,
+                 "Juego reiniciado correctamente",
+                 "Reinicio", JOptionPane.INFORMATION_MESSAGE);
+     }
+}
     
     /**
      * Cambia el modo de juego (estrategia de victoria)

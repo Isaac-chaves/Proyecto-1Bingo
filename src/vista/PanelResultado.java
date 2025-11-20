@@ -115,7 +115,10 @@ public void mostrarIconoBingoWin() {
     this.revalidate();
     this.repaint();
 }
-
+public void limpiarGanador() {
+    Label_Resultado.setText("0"); 
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
