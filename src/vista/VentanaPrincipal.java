@@ -11,36 +11,38 @@ import controlador.ControladorBingo;
  * @author isaac
  */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    // Variables de los paneles a insertar
-    private vista.PanelCartones panelCartones;
-    private vista.PanelTablero panelTablero;
-    private vista.PanelResultado panelResultado;
     private controlador.ControladorBingo controlador;
-    
-    /**
-     * Creates new form NewJFrame
-     */
+    private vista.PanelResultado panelResultado;
+    private vista.PanelTablero panelTablero;
+    private vista.PanelCartones panelCartones;
+    // Variables de los paneles a insertar
+  // Variables de los paneles a insertar
+private vista.PanelCartones panelCartones;
+private vista.PanelTablero panelTablero;
+private vista.PanelResultado panelResultado;
     public VentanaPrincipal() {
         initComponents();
         inicializarPaneles();
-        // Inicializar el controlador después de inicializar los paneles
-        controlador = new controlador.ControladorBingo(this);
+        configurarMenuTema();
+      aplicarTema(true);
         configurarEventosControlador();
+        controlador = new controlador.ControladorBingo(this);
+        // Inicializar el controlador después de inicializar los paneles
     }
-    
     private void configurarEventosControlador() {
         // Configurar eventos que llaman a los métodos del controlador
         botonCrear.addActionListener(e -> controlador.crearNuevoCarton());
-        jButton2.addActionListener(e -> controlador.reiniciarJuego());
         BtnCarbiarCarton.addActionListener(e -> controlador.cambiarCarton(true));
+        jButton2.addActionListener(e -> controlador.reiniciarJuego());
         btnRegresarCarton.addActionListener(e -> controlador.cambiarCarton(false));
         
-        // Configurar eventos del menú de modos de juego
         jRadioButtonMenuItem1.addActionListener(e -> controlador.cambiarModoJuego("NORMAL"));
-        jRadioButtonMenuItem2.addActionListener(e -> controlador.cambiarModoJuego("CUATRO_ESQUINAS"));
+        // Configurar eventos del menú de modos de juego
         jRadioButtonMenuItem3.addActionListener(e -> controlador.cambiarModoJuego("CARTON_LLENO"));
+        jRadioButtonMenuItem2.addActionListener(e -> controlador.cambiarModoJuego("CUATRO_ESQUINAS"));
     }
     
+
     public void inicializarPaneles() {
         panelCartones = new vista.PanelCartones();
         panelCartones.setBounds(0, 0, ContenedorCarton.getWidth(), ContenedorCarton.getHeight());
@@ -58,36 +60,115 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         this.repaint();
     }
     
-    // Métodos públicos para que el controlador acceda a los componentes
-    public String getModoSeleccionado() {
-        return (String) ComboModo.getSelectedItem();
+    panelTablero = new vista.PanelTablero(); //
+    contenedorTablero.setLayout(new java.awt.BorderLayout());
+    contenedorTablero.add(panelTablero, java.awt.BorderLayout.CENTER);
+    panelResultado = new vista.PanelResultado(); //
+    // Usamos BorderLayout para que el panel ocupe todo el JPanel ContendorResultado
+    ContendorResultado.setLayout(new java.awt.BorderLayout());
+    ContendorResultado.add(panelResultado, java.awt.BorderLayout.CENTER);
+    this.revalidate();
+    this.repaint();
+}
+ 
+    // Dentro de la clase VentanaPrincipal:
+
+private void configurarMenuTema() {
+    // 1. Cambiar el texto de los elementos del menú
+        jMenu1.setText("Tema");
+    if (jMenu1 != null) {
+    }
+        jMenuItem1.setText("Tema Claro");
+    if (jMenuItem1 != null) {
+        // 2. Agregar ActionListener para Tema Claro
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aplicarTema(false); // false = Tema Claro
+            }
+        });
+    }
+
+    if (jMenuItem2 != null) {
+        jMenuItem2.setText("Tema Oscuro");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+        // 3. Agregar ActionListener para Tema Oscuro
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                aplicarTema(true); // true = Tema Oscuro
+        });
+            }
+    }
+}
+
+
+// En VentanaPrincipal.java
+   private void aplicarTema(boolean esOscuro) {
+
+    java.awt.Color fondoPrincipal;
+    java.awt.Color colorTexto;
+    
+    if (esOscuro) {
+        // Tema Oscuro: Color base para la Ventana Principal
+        fondoPrincipal = new java.awt.Color(35, 38, 45); 
+        colorTexto = java.awt.Color.WHITE;
+    } else {
+        // Tema Claro: Color base para la Ventana Principal
+        colorTexto = java.awt.Color.BLACK;
+        fondoPrincipal = new java.awt.Color(230, 230, 230); 
+    }
+
+    // 1. Aplicar color a los contenedores de la Ventana Principal
+    // Al panel de contenido principal de la ventana
+    this.getContentPane().setBackground(fondoPrincipal);
+    
+    // A la barra de menú (jMenuBar1)
+    
+    if (jMenuBar1 != null) {
+        jMenuBar1.setForeground(colorTexto); // Cambia el color del texto del menú
+    }
+        jMenuBar1.setBackground(fondoPrincipal);
+    
+    if (contenedorTablero != null) {
+    // A los JPanels y contenedores que rodean los paneles hijos:
+        contenedorTablero.setBackground(fondoPrincipal);
+    if (ContenedorCarton != null) {
+    }
+    }
+        ContenedorCarton.setBackground(fondoPrincipal);
+        ContendorResultado.setBackground(fondoPrincipal);
+    if (ContendorResultado != null) {
     }
     
-    public void actualizarIndicadorCarton(String texto) {
-        jLabel1.setText("Cartón = " + texto);
+    if (jPanel1 != null) {
+    // Incluye cualquier otro JPanel de la Ventana Principal (jPanel1, jPanel2, etc.):
+        jPanel1.setBackground(fondoPrincipal);
+    if (jPanel2 != null) {
+    }
+        jPanel2.setBackground(fondoPrincipal);
+    }
+    }
+        jPanel3.setBackground(fondoPrincipal);
+    if (jPanel3 != null) {
+    if (jPanel4 != null) {
+        jPanel4.setBackground(fondoPrincipal);
+    }
+    if (jPanel5 != null) {
+        jPanel5.setBackground(fondoPrincipal);
     }
     
-    public void actualizarEstadoBotonesNavegacion(boolean habilitado) {
-        BtnCarbiarCarton.setEnabled(habilitado);
-        btnRegresarCarton.setEnabled(habilitado);
+    // 2. Llamar al método cambiarTema en cada panel hijo
+    if (panelCartones != null) {
+        panelCartones.cambiarTema(esOscuro);
+    if (panelTablero != null) {
     }
-    
-    // Getters para los paneles
-    public PanelCartones getPanelCartones() {
-        return panelCartones;
+        panelTablero.cambiarTema(esOscuro);
     }
-    
-    public PanelTablero getPanelTablero() {
-        return panelTablero;
+    if (panelResultado != null) {
+        panelResultado.cambiarTema(esOscuro);
+
     }
-    
-    public PanelResultado getPanelResultado() {
-        return panelResultado;
-    }
-    
-    public controlador.ControladorBingo getControlador() {
-        return controlador;
-    }
+    this.revalidate();
+    this.repaint();
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -107,6 +188,8 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         botonCrear = new javax.swing.JButton();
         ComboModo = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BtnCarbiarCarton = new javax.swing.JButton();
@@ -133,7 +216,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(51, 0, 102));
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
 
         javax.swing.GroupLayout ContenedorCartonLayout = new javax.swing.GroupLayout(ContenedorCarton);
@@ -200,6 +283,14 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jButton2.setText("Reiniciar");
 
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("Buscar");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -209,11 +300,16 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(35, 35, 35)
                         .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 317, Short.MAX_VALUE)
-                        .addComponent(ComboModo, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2)))
+                        .addComponent(jButton1)
+                        .addGap(79, 79, 79)))
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ComboModo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -222,9 +318,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addContainerGap(43, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ComboModo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboModo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
-                .addComponent(jButton2)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton2)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
@@ -407,6 +506,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         
     }//GEN-LAST:event_botonCrearActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -451,6 +554,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonCrear;
     private javax.swing.JButton btnRegresarCarton;
     private javax.swing.JPanel contenedorTablero;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -466,5 +570,6 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem2;
     private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem3;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

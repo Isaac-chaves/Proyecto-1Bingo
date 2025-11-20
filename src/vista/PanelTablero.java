@@ -4,8 +4,8 @@
  */
 package vista;
 
+import java.awt.Color;
 import modelo.TableroNumeros;
-
 /**
  *
  * @author isaac
@@ -96,6 +96,56 @@ private void inicializarPanelesMarcador() {
     panelesMarcador[72] = panelMarcador_73;
     panelesMarcador[73] = panelMarcador_74;
     panelesMarcador[74] = panelMarcador_75;
+    
+}
+public void cambiarTema(boolean esOscuro) {
+    // Definición de colores
+    Color fondoTableroPrincipal;
+    Color fondoMarcador;
+    Color colorTexto;
+
+    if (esOscuro) {
+        // Tema Oscuro:
+        fondoTableroPrincipal = new Color(40, 44, 52); // Gris oscuro principal
+        fondoMarcador = new Color(60, 65, 75); // Gris para los paneles de números
+        colorTexto = Color.WHITE;
+    } else {
+        // Tema Claro:
+        fondoTableroPrincipal = new Color(150, 150, 150); // Gris claro para el fondo principal
+        fondoMarcador = Color.WHITE; // Blanco para los paneles de números
+        colorTexto = Color.BLACK;
+    }
+
+    // 1. Aplicar color al fondo principal del tablero
+    TableroConNumero.setBackground(fondoTableroPrincipal);
+
+    // 2. Aplicar color a los 75 paneles de marcador con validación
+    for (javax.swing.JPanel panel : panelesMarcador) { // 'panelesMarcador' es tu arreglo de 75 paneles
+        if (panel != null) {
+            
+            // VALIDACIÓN: Solo cambiar el color si el fondo actual NO es rojo.
+            if (!java.awt.Color.RED.equals(panel.getBackground())) {
+                panel.setBackground(fondoMarcador);
+
+                // Cambiar el color del texto (JLabel) dentro de cada panel
+                for (java.awt.Component component : panel.getComponents()) {
+                    if (component instanceof javax.swing.JLabel) {
+                        ((javax.swing.JLabel) component).setForeground(colorTexto);
+                    }
+                }
+            } else {
+                // Si el panel está en rojo, asegurar que el texto dentro sea blanco.
+                for (java.awt.Component component : panel.getComponents()) {
+                    if (component instanceof javax.swing.JLabel) {
+                        ((javax.swing.JLabel) component).setForeground(java.awt.Color.WHITE);
+                    }
+                }
+            }
+        }
+    }
+
+    this.revalidate();
+    this.repaint();
 }
     /**
      * This method is called from within the constructor to initialize the form.

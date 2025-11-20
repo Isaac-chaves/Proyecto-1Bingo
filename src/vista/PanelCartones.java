@@ -53,6 +53,66 @@ public class PanelCartones extends javax.swing.JPanel {
 
         this.repaint(); // Fuerza el repintado del panel para mostrar el color
     }
+
+// Dentro de la clase PanelCartones:
+/**
+ * Cambia el tema de color para los paneles de cartones.
+ * @param esOscuro true para tema oscuro, false para tema claro.
+ */
+public void cambiarTema(boolean esOscuro) {
+    Color fondoPrincipal, fondoCarton;
+    Color colorTexto;
+
+    if (esOscuro) {
+        // Tema Oscuro:
+        fondoPrincipal = new Color(30, 30, 30); // Fondo oscuro para el contenedor
+        fondoCarton = new Color(60, 63, 65); // Color de los cartones
+        colorTexto = Color.WHITE;
+    } else {
+        // Tema Claro:
+        fondoPrincipal = new Color(240, 240, 240); // Fondo claro para el contenedor
+        fondoCarton = Color.WHITE; // Color de los cartones
+        colorTexto = Color.BLACK;
+    }
+
+    // Cambiar el fondo principal del panel
+    FondoCarton.setBackground(fondoPrincipal);
+    
+    // Arrays que contienen tus 25 JPanels y JLabels de cartón (Asegúrate de que estas variables sean accesibles)
+    javax.swing.JPanel[] panelesCarton = {
+        CartonCambiacolor1, CartonCambiacolor2, CartonCambiacolor3, CartonCambiacolor4, CartonCambiacolor5,
+        CartonCambiacolor6, CartonCambiacolor7, CartonCambiacolor8, CartonCambiacolor9, CartonCambiacolor10,
+        CartonCambiacolor11, CartonCambiacolor12, CartonCambiacolor13, CartonCambiacolor14, CartonCambiacolor15,
+        CartonCambiacolor16, CartonCambiacolor17, CartonCambiacolor18, CartonCambiacolor19, CartonCambiacolor20,
+        CartonCambiacolor21, CartonCambiacolor22, CartonCambiacolor23, CartonCambiacolor24, CartonCambiacolor25
+    };
+
+    javax.swing.JLabel[] etiquetasNumeros = {
+        ContenedorNumCarton1, ContenedorNumCarton2, ContenedorNumCarton3, ContenedorNumCarton4, ContenedorNumCarton5,
+        ContenedorNumCarton6, ContenedorNumCarton7, ContenedorNumCarton8, ContenedorNumCarton9, ContenedorNumCarton10,
+        ContenedorNumCarton11, ContenedorNumCarton12, ContenedorNumCarton13, ContenedorNumCarton14, ContenedorNumCarton15,
+        ContenedorNumCarton16, ContenedorNumCarton17, ContenedorNumCarton18, ContenedorNumCarton19, ContenedorNumCarton20,
+        ContenedorNumCarton21, ContenedorNumCarton22, ContenedorNumCarton23, ContenedorNumCarton24, ContenedorNumCarton25
+    };
+
+    // Aplicar los colores con la validación de color rojo
+    for (int i = 0; i < panelesCarton.length; i++) {
+        javax.swing.JPanel panel = panelesCarton[i];
+        javax.swing.JLabel etiqueta = etiquetasNumeros[i];
+        
+        // VALIDACIÓN: Solo cambiar el color si el fondo actual NO es rojo.
+        if (panel != null && !java.awt.Color.RED.equals(panel.getBackground())) {
+            panel.setBackground(fondoCarton);
+            etiqueta.setForeground(colorTexto);
+        } else if (panel != null) {
+            // Si el panel está en rojo o un color de estado, asegurar texto blanco para visibilidad.
+            etiqueta.setForeground(java.awt.Color.WHITE); 
+        }
+    }
+
+    this.revalidate();
+    this.repaint();
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

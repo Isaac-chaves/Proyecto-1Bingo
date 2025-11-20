@@ -4,9 +4,9 @@
  */
 package vista;
 
+import java.awt.Color;
 import modelo.Carton;
 import modelo.JuegoBingo;
-
 /**
  *
  * @author isaac
@@ -19,6 +19,31 @@ public class PanelResultado extends javax.swing.JPanel {
     public PanelResultado() {
         initComponents();
     }
+
+// Dentro de la clase PanelResultado:
+/**
+ * Cambia el tema de color para el panel de resultados.
+ * @param esOscuro true para tema oscuro, false para tema claro.
+ */
+public void cambiarTema(boolean esOscuro) {
+    Color fondoPanel, colorTexto;
+
+    if (esOscuro) {
+        // Tema Oscuro:
+        fondoPanel = new Color(60, 63, 65);
+        colorTexto = Color.WHITE;
+    } else {
+        // Tema Claro:
+        fondoPanel = new Color(214, 214, 209); // Color claro original
+        colorTexto = Color.BLACK;
+    }
+
+    jPanel1.setBackground(fondoPanel);
+    Label_Resultado.setForeground(colorTexto);
+
+    this.revalidate();
+    this.repaint();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.

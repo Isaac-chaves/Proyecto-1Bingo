@@ -54,7 +54,7 @@ public class ControlManual extends javax.swing.JDialog {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(0, 102, 102));
+        jPanel2.setBackground(new java.awt.Color(209, 179, 174));
 
         jLabel2.setText("Ingresar Manual");
 
