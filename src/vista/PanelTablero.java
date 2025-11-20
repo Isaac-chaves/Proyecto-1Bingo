@@ -1,10 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vista;
 
 import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import java.awt.Component;
 
 /**
  *
@@ -12,11 +11,13 @@ import java.awt.Color;
  */
 public class PanelTablero extends javax.swing.JPanel {
     
-    // El array de paneles ya estaba declarado en el snippet
+    // Lista de 75 paneles que representan los números cantados
     private final javax.swing.JPanel[] panelesMarcador = new javax.swing.JPanel[75];
-    
-    private static final Color COLOR_MARCADO = Color.GREEN;
-    private static final Color COLOR_POR_DEFECTO = Color.LIGHT_GRAY;
+    private final Color COLOR_MARCADO = Color.RED;
+    private final Color COLOR_TEXTO_NORMAL = Color.BLACK;
+    // Usaremos Color.WHITE como color base para desmarcar, ya que cambiarTema
+    // se encarga de aplicar el color del tema si está activo.
+    private final Color COLOR_FONDO_INICIAL = Color.WHITE; 
 
     /**
      * Creates new form PanelTablero
@@ -24,163 +25,189 @@ public class PanelTablero extends javax.swing.JPanel {
     public PanelTablero() {
         initComponents();
         inicializarPanelesMarcador();
-        reiniciarTablero(); // Llamar para asegurar el color inicial
-    }
-private void inicializarPanelesMarcador() {
-    // Inicialización de la lista de paneles para acceso por índice (0-74)
-    panelesMarcador[0] = panelMarcador_1;
-    panelesMarcador[1] = panelMarcador_2;
-    panelesMarcador[2] = panelMarcador_3;
-    panelesMarcador[3] = panelMarcador_4;
-    panelesMarcador[4] = panelMarcador_5;
-    panelesMarcador[5] = panelMarcador_6;
-    panelesMarcador[6] = panelMarcador_7;
-    panelesMarcador[7] = panelMarcador_8;
-    panelesMarcador[8] = panelMarcador_9;
-    panelesMarcador[9] = panelMarcador_10;
-    panelesMarcador[10] = panelMarcador_11;
-    panelesMarcador[11] = panelMarcador_12;
-    panelesMarcador[12] = panelMarcador_13;
-    panelesMarcador[13] = panelMarcador_14;
-    panelesMarcador[14] = panelMarcador_15;
-    panelesMarcador[15] = panelMarcador_16;
-    panelesMarcador[16] = panelMarcador_17;
-    panelesMarcador[17] = panelMarcador_18;
-    panelesMarcador[18] = panelMarcador_19;
-    panelesMarcador[19] = panelMarcador_20;
-    panelesMarcador[20] = panelMarcador_21;
-    panelesMarcador[21] = panelMarcador_22;
-    panelesMarcador[22] = panelMarcador_23;
-    panelesMarcador[23] = panelMarcador_24;
-    panelesMarcador[24] = panelMarcador_25;
-    panelesMarcador[25] = panelMarcador_26;
-    panelesMarcador[26] = panelMarcador_27;
-    panelesMarcador[27] = panelMarcador_28;
-    panelesMarcador[28] = panelMarcador_29;
-    panelesMarcador[29] = panelMarcador_30;
-    panelesMarcador[30] = panelMarcador_31;
-    panelesMarcador[31] = panelMarcador_32;
-    panelesMarcador[32] = panelMarcador_33;
-    panelesMarcador[33] = panelMarcador_34;
-    panelesMarcador[34] = panelMarcador_35;
-    panelesMarcador[35] = panelMarcador_36;
-    panelesMarcador[36] = panelMarcador_37;
-    panelesMarcador[37] = panelMarcador_38;
-    panelesMarcador[38] = panelMarcador_39;
-    panelesMarcador[39] = panelMarcador_40;
-    panelesMarcador[40] = panelMarcador_41;
-    panelesMarcador[41] = panelMarcador_42;
-    panelesMarcador[42] = panelMarcador_43;
-    panelesMarcador[43] = panelMarcador_44;
-    panelesMarcador[44] = panelMarcador_45;
-    panelesMarcador[45] = panelMarcador_46;
-    panelesMarcador[46] = panelMarcador_47;
-    panelesMarcador[47] = panelMarcador_48;
-    panelesMarcador[48] = panelMarcador_49;
-    panelesMarcador[49] = panelMarcador_50;
-    panelesMarcador[50] = panelMarcador_51;
-    panelesMarcador[51] = panelMarcador_52;
-    panelesMarcador[52] = panelMarcador_53;
-    panelesMarcador[53] = panelMarcador_54;
-    panelesMarcador[54] = panelMarcador_55;
-    panelesMarcador[55] = panelMarcador_56;
-    panelesMarcador[56] = panelMarcador_57;
-    panelesMarcador[57] = panelMarcador_58;
-    panelesMarcador[58] = panelMarcador_59;
-    panelesMarcador[59] = panelMarcador_60;
-    panelesMarcador[60] = panelMarcador_61;
-    panelesMarcador[61] = panelMarcador_62;
-    panelesMarcador[62] = panelMarcador_63;
-    panelesMarcador[63] = panelMarcador_64;
-    panelesMarcador[64] = panelMarcador_65;
-    panelesMarcador[65] = panelMarcador_66;
-    panelesMarcador[66] = panelMarcador_67;
-    panelesMarcador[67] = panelMarcador_68;
-    panelesMarcador[68] = panelMarcador_69;
-    panelesMarcador[69] = panelMarcador_70;
-    panelesMarcador[70] = panelMarcador_71;
-    panelesMarcador[71] = panelMarcador_72;
-    panelesMarcador[72] = panelMarcador_73;
-    panelesMarcador[73] = panelMarcador_74;
-    panelesMarcador[74] = panelMarcador_75;
-    
-}
+    } 
 
-public void marcarNumero(int numero) {
-        if (numero >= 1 && numero <= 75) {
-            // El índice del array es 'numero - 1'
-            panelesMarcador[numero - 1].setBackground(COLOR_MARCADO);
-        }
-    }
-
-    /**
-     * Desmarca visualmente el número en el tablero (vuelve al color por defecto).
-     * @param numero El número a desmarcar (1 a 75).
-     */
-    public void desmarcarNumero(int numero) {
-        if (numero >= 1 && numero <= 75) {
-            // El índice del array es 'numero - 1'
-            panelesMarcador[numero - 1].setBackground(COLOR_POR_DEFECTO);
-        }
+    private void inicializarPanelesMarcador() {
+        // Inicialización de la lista de paneles para acceso por índice (0-74)
+        panelesMarcador[0] = panelMarcador_1;
+        panelesMarcador[1] = panelMarcador_2;
+        panelesMarcador[2] = panelMarcador_3;
+        panelesMarcador[3] = panelMarcador_4;
+        panelesMarcador[4] = panelMarcador_5;
+        panelesMarcador[5] = panelMarcador_6;
+        panelesMarcador[6] = panelMarcador_7;
+        panelesMarcador[7] = panelMarcador_8;
+        panelesMarcador[8] = panelMarcador_9;
+        panelesMarcador[9] = panelMarcador_10;
+        panelesMarcador[10] = panelMarcador_11;
+        panelesMarcador[11] = panelMarcador_12;
+        panelesMarcador[12] = panelMarcador_13;
+        panelesMarcador[13] = panelMarcador_14;
+        panelesMarcador[14] = panelMarcador_15;
+        panelesMarcador[15] = panelMarcador_16;
+        panelesMarcador[16] = panelMarcador_17;
+        panelesMarcador[17] = panelMarcador_18;
+        panelesMarcador[18] = panelMarcador_19;
+        panelesMarcador[19] = panelMarcador_20;
+        panelesMarcador[20] = panelMarcador_21;
+        panelesMarcador[21] = panelMarcador_22;
+        panelesMarcador[22] = panelMarcador_23;
+        panelesMarcador[23] = panelMarcador_24;
+        panelesMarcador[24] = panelMarcador_25;
+        panelesMarcador[25] = panelMarcador_26;
+        panelesMarcador[26] = panelMarcador_27;
+        panelesMarcador[27] = panelMarcador_28;
+        panelesMarcador[28] = panelMarcador_29;
+        panelesMarcador[29] = panelMarcador_30;
+        panelesMarcador[30] = panelMarcador_31;
+        panelesMarcador[31] = panelMarcador_32;
+        panelesMarcador[32] = panelMarcador_33;
+        panelesMarcador[33] = panelMarcador_34;
+        panelesMarcador[34] = panelMarcador_35;
+        panelesMarcador[35] = panelMarcador_36;
+        panelesMarcador[36] = panelMarcador_37;
+        panelesMarcador[37] = panelMarcador_38;
+        panelesMarcador[38] = panelMarcador_39;
+        panelesMarcador[39] = panelMarcador_40;
+        panelesMarcador[40] = panelMarcador_41;
+        panelesMarcador[41] = panelMarcador_42;
+        panelesMarcador[42] = panelMarcador_43;
+        panelesMarcador[43] = panelMarcador_44;
+        panelesMarcador[44] = panelMarcador_45;
+        panelesMarcador[45] = panelMarcador_46;
+        panelesMarcador[46] = panelMarcador_47;
+        panelesMarcador[47] = panelMarcador_48;
+        panelesMarcador[48] = panelMarcador_49;
+        panelesMarcador[49] = panelMarcador_50;
+        panelesMarcador[50] = panelMarcador_51;
+        panelesMarcador[51] = panelMarcador_52;
+        panelesMarcador[52] = panelMarcador_53;
+        panelesMarcador[53] = panelMarcador_54;
+        panelesMarcador[54] = panelMarcador_55;
+        panelesMarcador[55] = panelMarcador_56;
+        panelesMarcador[56] = panelMarcador_57;
+        panelesMarcador[57] = panelMarcador_58;
+        panelesMarcador[58] = panelMarcador_59;
+        panelesMarcador[59] = panelMarcador_60;
+        panelesMarcador[60] = panelMarcador_61;
+        panelesMarcador[61] = panelMarcador_62;
+        panelesMarcador[62] = panelMarcador_63;
+        panelesMarcador[63] = panelMarcador_64;
+        panelesMarcador[64] = panelMarcador_65;
+        panelesMarcador[65] = panelMarcador_66;
+        panelesMarcador[66] = panelMarcador_67;
+        panelesMarcador[67] = panelMarcador_68;
+        panelesMarcador[68] = panelMarcador_69;
+        panelesMarcador[69] = panelMarcador_70;
+        panelesMarcador[70] = panelMarcador_71;
+        panelesMarcador[71] = panelMarcador_72;
+        panelesMarcador[72] = panelMarcador_73;
+        panelesMarcador[73] = panelMarcador_74;
+        panelesMarcador[74] = panelMarcador_75;
     }
     
+    // =========================================================================
+    // MÉTODOS DE MARCADO (Nuevas funciones)
+    // =========================================================================
+
     /**
-     * Reinicia el tablero desmarcando todos los números.
+     * Marca un número como ya cantado (cambia el color del panel a rojo).
+     * @param numero El número cantado (1 a 75).
      */
-    public void reiniciarTablero() {
-        for (int i = 0; i < 75; i++) {
-            panelesMarcador[i].setBackground(COLOR_POR_DEFECTO);
-        }
-    }
-public void cambiarTema(boolean esOscuro) {
-    // Definición de colores
-    Color fondoTableroPrincipal;
-    Color fondoMarcador;
-    Color colorTexto;
-
-    if (esOscuro) {
-        // Tema Oscuro:
-        fondoTableroPrincipal = new Color(40, 44, 52); // Gris oscuro principal
-        fondoMarcador = new Color(60, 65, 75); // Gris para los paneles de números
-        colorTexto = Color.WHITE;
-    } else {
-        // Tema Claro:
-        fondoTableroPrincipal = new Color(150, 150, 150); // Gris claro para el fondo principal
-        fondoMarcador = Color.WHITE; // Blanco para los paneles de números
-        colorTexto = Color.BLACK;
-    }
-
-    // 1. Aplicar color al fondo principal del tablero
-    TableroConNumero.setBackground(fondoTableroPrincipal);
-
-    // 2. Aplicar color a los 75 paneles de marcador con validación
-    for (javax.swing.JPanel panel : panelesMarcador) { // 'panelesMarcador' es tu arreglo de 75 paneles
-        if (panel != null) {
-            
-            // VALIDACIÓN: Solo cambiar el color si el fondo actual NO es rojo.
-            if (!java.awt.Color.RED.equals(panel.getBackground())) {
-                panel.setBackground(fondoMarcador);
-
-                // Cambiar el color del texto (JLabel) dentro de cada panel
-                for (java.awt.Component component : panel.getComponents()) {
-                    if (component instanceof javax.swing.JLabel) {
-                        ((javax.swing.JLabel) component).setForeground(colorTexto);
-                    }
-                }
-            } else {
-                // Si el panel está en rojo, asegurar que el texto dentro sea blanco.
-                for (java.awt.Component component : panel.getComponents()) {
-                    if (component instanceof javax.swing.JLabel) {
-                        ((javax.swing.JLabel) component).setForeground(java.awt.Color.WHITE);
+    public void marcarNumero(int numero) {
+        if (numero >= 1 && numero <= 75) {
+            javax.swing.JPanel panel = panelesMarcador[numero - 1];
+            if (panel != null) {
+                panel.setBackground(COLOR_MARCADO); // Marcar con rojo
+                
+                // Asegurar que el texto dentro del JLabel sea blanco para contraste
+                for (Component component : panel.getComponents()) {
+                    if (component instanceof JLabel) {
+                        ((JLabel) component).setForeground(Color.WHITE);
+                        break; // Solo hay un JLabel por panel
                     }
                 }
             }
         }
     }
 
-    this.revalidate();
-    this.repaint();
-}
+    /**
+     * Desmarca un número (restaura el color del panel al color normal).
+     * Esto es esencial para la función de Reiniciar Juego.
+     * @param numero El número a desmarcar (1 a 75).
+     */
+    public void desmarcarNumero(int numero) {
+        if (numero >= 1 && numero <= 75) {
+            javax.swing.JPanel panel = panelesMarcador[numero - 1];
+            if (panel != null) {
+                // Restaurar a blanco (o el color que el tema haya definido previamente, 
+                // ya que cambiarTema lo ajustará si está activo)
+                panel.setBackground(COLOR_FONDO_INICIAL); 
+                
+                // Restaurar el texto del JLabel a negro
+                for (Component component : panel.getComponents()) {
+                    if (component instanceof JLabel) {
+                        ((JLabel) component).setForeground(COLOR_TEXTO_NORMAL);
+                        break; // Solo hay un JLabel por panel
+                    }
+                }
+            }
+        }
+    }
+    
+    // =========================================================================
+    // MÉTODO DE TEMA (Existente)
+    // =========================================================================
+
+    public void cambiarTema(boolean esOscuro) {
+        // Definición de colores
+        Color fondoTableroPrincipal;
+        Color fondoMarcador;
+        Color colorTexto;
+
+        if (esOscuro) {
+            // Tema Oscuro:
+            fondoTableroPrincipal = new Color(40, 44, 52); // Gris oscuro principal
+            fondoMarcador = new Color(60, 65, 75); // Gris para los paneles de números
+            colorTexto = Color.WHITE;
+        } else {
+            // Tema Claro:
+            fondoTableroPrincipal = new Color(150, 150, 150); // Gris claro para el fondo principal
+            fondoMarcador = Color.WHITE; // Blanco para los paneles de números
+            colorTexto = Color.BLACK;
+        }
+
+        // 1. Aplicar color al fondo principal del tablero
+        TableroConNumero.setBackground(fondoTableroPrincipal);
+
+        // 2. Aplicar color a los 75 paneles de marcador con validación
+        for (javax.swing.JPanel panel : panelesMarcador) { // 'panelesMarcador' es tu arreglo de 75 paneles
+            if (panel != null) {
+                
+                // VALIDACIÓN: Solo cambiar el color si el fondo actual NO es rojo (es decir, si no está cantado).
+                if (!java.awt.Color.RED.equals(panel.getBackground())) {
+                    panel.setBackground(fondoMarcador);
+
+                    // Cambiar el color del texto (JLabel) dentro de cada panel
+                    for (java.awt.Component component : panel.getComponents()) {
+                        if (component instanceof javax.swing.JLabel) {
+                            ((javax.swing.JLabel) component).setForeground(colorTexto);
+                        }
+                    }
+                } else {
+                    // Si el panel está en rojo (cantado), asegurar que el texto dentro sea blanco.
+                    for (java.awt.Component component : panel.getComponents()) {
+                        if (component instanceof javax.swing.JLabel) {
+                            ((javax.swing.JLabel) component).setForeground(java.awt.Color.WHITE);
+                        }
+                    }
+                }
+            }
+        }
+
+        this.revalidate();
+        this.repaint();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

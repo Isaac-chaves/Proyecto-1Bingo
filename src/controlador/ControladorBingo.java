@@ -152,7 +152,7 @@ public class ControladorBingo {
     /**
      * Genera un número automático (modo automático)
      */
-    public void generarNumeroAutomatico() {
+public void generarNumeroAutomatico() {
         if (juegoBingo.getCartones().isEmpty()) {
             JOptionPane.showMessageDialog(ventanaPrincipal, 
                 "Debe crear al menos un cartón antes de jugar", 
@@ -170,9 +170,16 @@ public class ControladorBingo {
         juegoEnCurso = true;
         int numeroGenerado = juegoBingo.sacarNumeroAutomatico();
         
+        // 1. Marcar el número en el tablero global
         actualizarVistaTablero();
-        actualizarVistaCarton();
+        
+        // ⭐ PASO CLAVE 1: Marcar inmediatamente en el cartón visible (nueva característica)
+        panelCartones.marcarCasilla(numeroGenerado); 
+        
+        // 2. Actualizar el panel de resultado
         actualizarResultado(numeroGenerado);
+        
+        // 3. No es necesario llamar a actualizarVistaCarton(), el marcado fue directo.
         
         verificarGanador();
     }
@@ -208,9 +215,17 @@ public class ControladorBingo {
             }
             
             juegoEnCurso = true;
+            
+            // 1. Marcar el número en el tablero global
             actualizarVistaTablero();
-            actualizarVistaCarton();
+            
+            // ⭐ PASO CLAVE 2: Marcar inmediatamente en el cartón visible (nueva característica)
+            panelCartones.marcarCasilla(numero); 
+            
+            // 2. Actualizar el panel de resultado
             actualizarResultado(numero);
+            
+            // 3. No es necesario llamar a actualizarVistaCarton(), el marcado fue directo.
             
             verificarGanador();
             
@@ -272,20 +287,30 @@ public class ControladorBingo {
     /**
      * Actualiza el panel de cartones con el cartón actual
      */
-    private void actualizarVistaCarton() {
-        List<Carton> cartones = juegoBingo.getCartones();
-        
-        if (cartones.isEmpty()) {
-            panelCartones.limpiarCarton();
-            return;
-        }
-        
-        Carton cartonActual = cartones.get(indiceCartonActual);
-        int[][] numeros = cartonActual.getNumeros();
-        boolean[][] marcados = cartonActual.getMarcados();
-        
-        panelCartones.mostrarCarton(numeros, marcados);
+   private void actualizarVistaCarton() {
+    List<Carton> cartones = juegoBingo.getCartones();
+    
+    if (cartones.isEmpty()) {
+        // Si no hay cartones, limpia la vista.
+        panelCartones.limpiarCarton(); 
+        ventanaPrincipal.actualizarLabelCarton("Sin cartones");
+        return;
     }
+
+    // Obtiene el cartón actual basado en el índice
+    Carton cartonActual = cartones.get(indiceCartonActual);
+    
+    // Obtiene las matrices de números y de estado de marcado
+    int[][] numeros = cartonActual.getNumeros();
+    boolean[][] marcados = cartonActual.getMarcados();
+    
+    // ⭐ LLAMADA CLAVE: Pasa ambos estados al panel. 
+    // PanelCartones debe usar 'marcados' para pintar de rojo.
+    panelCartones.mostrarCarton(numeros, marcados);
+    
+    // Actualiza la etiqueta de "Cartón X de Y"
+    actualizarLabelCarton(); 
+}
     
     /**
      * Actualiza el tablero de números cantados

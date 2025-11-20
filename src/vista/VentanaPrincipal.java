@@ -125,16 +125,19 @@ private void configurarEventos() {
     jButton2.addActionListener(e -> controlador.reiniciarJuego());
     
     // Botón buscar
-    jButton1.addActionListener(e -> {
-        controlador.buscarCarton(jTextField1.getText());
+    marcar.addActionListener(e -> {
+        controlador.buscarCarton(MarcarNumeroManual.getText());
     });
     
     // Campo de texto (Enter para buscar)
-    jTextField1.addActionListener(e -> {
-        controlador.buscarCarton(jTextField1.getText());
+    MarcarNumeroManual.addActionListener(e -> {
+        controlador.buscarCarton(MarcarNumeroManual.getText());
     });
     
+ 
    
+    
+    
     
     // Menú items de tema
     jMenuItem1.addActionListener(e -> {
@@ -168,8 +171,8 @@ private void configurarEventos() {
         botonCrear = new javax.swing.JButton();
         ComboModo = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        MarcarNumeroManual = new javax.swing.JTextField();
+        marcar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BtnCarbiarCarton = new javax.swing.JButton();
@@ -271,13 +274,13 @@ private void configurarEventos() {
 
         jButton2.setText("Reiniciar");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        MarcarNumeroManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                MarcarNumeroManualActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Buscar");
+        marcar.setText("Buscar");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -289,11 +292,11 @@ private void configurarEventos() {
                         .addGap(35, 35, 35)
                         .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(MarcarNumeroManual, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
+                        .addComponent(marcar)
                         .addGap(79, 79, 79)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ComboModo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -307,11 +310,11 @@ private void configurarEventos() {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ComboModo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(MarcarNumeroManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(4, 4, 4)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(marcar))
                 .addContainerGap())
         );
 
@@ -462,15 +465,16 @@ private void configurarEventos() {
     }//GEN-LAST:event_ComboModoActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
-        // TODO add your handling code here:
+
+        controlador.cambiarModoJuego("NORMAL");
     }//GEN-LAST:event_jRadioButtonMenuItem1ActionPerformed
 
     private void jRadioButtonMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        controlador.cambiarModoJuego("CUATRO_ESQUINAS");
     }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
     private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
-        // TODO add your handling code here:
+         controlador.cambiarModoJuego("CARTON_LLENO");
     }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -481,9 +485,9 @@ private void configurarEventos() {
        
     }//GEN-LAST:event_botonCrearActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void MarcarNumeroManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarcarNumeroManualActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_MarcarNumeroManualActionPerformed
 
     /**
      * @param args the command line arguments
@@ -527,10 +531,10 @@ public static void main(String args[]) {
     private javax.swing.JComboBox<String> ComboModo;
     private javax.swing.JPanel ContendorResultado;
     private javax.swing.JDesktopPane ContenedorCarton;
+    private javax.swing.JTextField MarcarNumeroManual;
     private javax.swing.JButton botonCrear;
     private javax.swing.JButton btnRegresarCarton;
     private javax.swing.JPanel contenedorTablero;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
@@ -547,6 +551,6 @@ public static void main(String args[]) {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton marcar;
     // End of variables declaration//GEN-END:variables
 }
