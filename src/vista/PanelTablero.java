@@ -26,19 +26,186 @@ public class PanelTablero extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        TableroConNumero = new javax.swing.JPanel();
+        panelMarcador_1 = new javax.swing.JPanel();
+        Num_1 = new javax.swing.JLabel();
+        panelMarcador_2 = new javax.swing.JPanel();
+        Num_2 = new javax.swing.JLabel();
+        panelMarcador_3 = new javax.swing.JPanel();
+        Num_3 = new javax.swing.JLabel();
+        panelMarcador_4 = new javax.swing.JPanel();
+        Num_4 = new javax.swing.JLabel();
+        panelMarcador_5 = new javax.swing.JPanel();
+        Num_5 = new javax.swing.JLabel();
+
+        TableroConNumero.setBackground(new java.awt.Color(51, 153, 255));
+
+        panelMarcador_1.setBackground(new java.awt.Color(255, 255, 255));
+
+        Num_1.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        Num_1.setText("1");
+
+        javax.swing.GroupLayout panelMarcador_1Layout = new javax.swing.GroupLayout(panelMarcador_1);
+        panelMarcador_1.setLayout(panelMarcador_1Layout);
+        panelMarcador_1Layout.setHorizontalGroup(
+            panelMarcador_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMarcador_1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Num_1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelMarcador_1Layout.setVerticalGroup(
+            panelMarcador_1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMarcador_1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Num_1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelMarcador_2.setBackground(new java.awt.Color(255, 255, 255));
+
+        Num_2.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        Num_2.setText("2");
+
+        javax.swing.GroupLayout panelMarcador_2Layout = new javax.swing.GroupLayout(panelMarcador_2);
+        panelMarcador_2.setLayout(panelMarcador_2Layout);
+        panelMarcador_2Layout.setHorizontalGroup(
+            panelMarcador_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMarcador_2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Num_2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelMarcador_2Layout.setVerticalGroup(
+            panelMarcador_2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMarcador_2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Num_2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelMarcador_3.setBackground(new java.awt.Color(255, 255, 255));
+
+        Num_3.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        Num_3.setText("3");
+
+        javax.swing.GroupLayout panelMarcador_3Layout = new javax.swing.GroupLayout(panelMarcador_3);
+        panelMarcador_3.setLayout(panelMarcador_3Layout);
+        panelMarcador_3Layout.setHorizontalGroup(
+            panelMarcador_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMarcador_3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Num_3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelMarcador_3Layout.setVerticalGroup(
+            panelMarcador_3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMarcador_3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Num_3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        panelMarcador_4.setBackground(new java.awt.Color(255, 255, 255));
+
+        Num_4.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        Num_4.setText("4");
+
+        javax.swing.GroupLayout panelMarcador_4Layout = new javax.swing.GroupLayout(panelMarcador_4);
+        panelMarcador_4.setLayout(panelMarcador_4Layout);
+        panelMarcador_4Layout.setHorizontalGroup(
+            panelMarcador_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMarcador_4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Num_4, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelMarcador_4Layout.setVerticalGroup(
+            panelMarcador_4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMarcador_4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Num_4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        panelMarcador_5.setBackground(new java.awt.Color(255, 255, 255));
+
+        Num_5.setFont(new java.awt.Font("Serif", 1, 24)); // NOI18N
+        Num_5.setText("5");
+
+        javax.swing.GroupLayout panelMarcador_5Layout = new javax.swing.GroupLayout(panelMarcador_5);
+        panelMarcador_5.setLayout(panelMarcador_5Layout);
+        panelMarcador_5Layout.setHorizontalGroup(
+            panelMarcador_5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMarcador_5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Num_5, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        panelMarcador_5Layout.setVerticalGroup(
+            panelMarcador_5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMarcador_5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Num_5, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout TableroConNumeroLayout = new javax.swing.GroupLayout(TableroConNumero);
+        TableroConNumero.setLayout(TableroConNumeroLayout);
+        TableroConNumeroLayout.setHorizontalGroup(
+            TableroConNumeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TableroConNumeroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelMarcador_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelMarcador_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelMarcador_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelMarcador_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelMarcador_5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(293, Short.MAX_VALUE))
+        );
+        TableroConNumeroLayout.setVerticalGroup(
+            TableroConNumeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(TableroConNumeroLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(TableroConNumeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelMarcador_5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMarcador_4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMarcador_3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMarcador_2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMarcador_1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(369, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(TableroConNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(TableroConNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Num_1;
+    private javax.swing.JLabel Num_2;
+    private javax.swing.JLabel Num_3;
+    private javax.swing.JLabel Num_4;
+    private javax.swing.JLabel Num_5;
+    private javax.swing.JPanel TableroConNumero;
+    private javax.swing.JPanel panelMarcador_1;
+    private javax.swing.JPanel panelMarcador_2;
+    private javax.swing.JPanel panelMarcador_3;
+    private javax.swing.JPanel panelMarcador_4;
+    private javax.swing.JPanel panelMarcador_5;
     // End of variables declaration//GEN-END:variables
 }
