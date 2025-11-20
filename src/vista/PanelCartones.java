@@ -133,22 +133,7 @@ public class PanelCartones extends JPanel {
         }
 }
 // Código en PanelTablero.java (ya existente en tu código)
-public void marcarNumero(int numero) {
-    if (numero >= 1 && numero <= 75) {
-        javax.swing.JPanel panel = panelesMarcador[numero - 1];
-        if (panel != null) {
-            panel.setBackground(COLOR_MARCADO); // Marcar con rojo
-            
-            // Asegurar que el texto dentro del JLabel sea blanco para contraste
-            for (Component component : panel.getComponents()) {
-                if (component instanceof JLabel jLabel) {
-                    jLabel.setForeground(Color.WHITE);
-                    break; 
-                }
-            }
-        }
-    }
-}
+
     // Métodos Getter
     public JLabel getLabel(int i, int j) {
         return lbl[i][j];
