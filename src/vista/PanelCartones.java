@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 
 public class PanelCartones extends JPanel {
     
-    private JButton[][] btn;
+    private final JButton[][] btn;
     private final int numFilas = 5;
     private final int numColumnas = 5;
     
@@ -137,8 +137,6 @@ public class PanelCartones extends JPanel {
         this.revalidate();
         this.repaint();
     }
-}
-
 /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -179,4 +177,4 @@ public class PanelCartones extends JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel FondoCarton;
     // End of variables declaration//GEN-END:variables
-
+}

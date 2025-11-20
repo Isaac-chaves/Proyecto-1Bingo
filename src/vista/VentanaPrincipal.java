@@ -489,6 +489,22 @@ private void configurarEventos() {
         // TODO add your handling code here:
     }//GEN-LAST:event_MarcarNumeroManualActionPerformed
 
+    
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
+        // Lógica para cambiar el modo a normal
+        controlador.cambiarModoJuego("NORMAL");
+    }
+
+    private void CambiarmodeasEsquinasActionPerformed(java.awt.event.ActionEvent evt) {
+        // Lógica para cambiar el modo a esquinas
+        controlador.cambiarModoJuego("CUATRO_ESQUINAS");
+    }
+
+    private void CambiarmodeCompletoActionPerformed(java.awt.event.ActionEvent evt) {
+        // Lógica para cambiar el modo a completo
+        controlador.cambiarModoJuego("CARTON_LLENO");
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -521,8 +537,8 @@ public static void main(String args[]) {
                 new VentanaPrincipal().setVisible(true);
             }
         });
-    }
 
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCarbiarCarton;
     private javax.swing.JMenuItem CambiarmodeCompleto;
