@@ -15,7 +15,7 @@ public class ControlManual extends javax.swing.JDialog {
 
     private Frame parentFrame;
     private int[][] cartonManual;
-    private int indiceActual; // B, I, N, G, O (0 a 4)
+    private int indiceActual; // Índice lineal para la posición de ingreso (0 a 24, saltando el 12)
 
     /**
      * Creates new form ControlManual
@@ -29,9 +29,9 @@ public class ControlManual extends javax.swing.JDialog {
     
     private void inicializarManual() {
         this.cartonManual = new int[5][5];
-        this.indiceActual = 0; // Comienza con la columna 'B'
+        this.indiceActual = 0; // Comienza con la columna 'B', fila 1 (índice 0)
         
-        // Inicializa el centro (N-3) como FREE (valor 0)
+        // Inicializa el centro (N-3, que es Fila 2, Columna 2) como FREE (valor 0)
         cartonManual[2][2] = 0;
         
         actualizarEtiquetaIndice();
@@ -41,12 +41,18 @@ public class ControlManual extends javax.swing.JDialog {
     
     private void actualizarEtiquetaIndice() {
         String[] letras = {"B", "I", "N", "G", "O"};
-        indice.setText(letras[indiceActual] + "-" + (getFilaActual() + 1));
+        // El índice lineal nos da la columna (columna = indiceActual / 5) y la fila (fila = indiceActual % 5)
+        int columna = indiceActual / 5;
+        int fila = getFilaActual();
+        
+        // Muestra la letra de la columna y el número de fila (1 a 5)
+        indice.setText(letras[columna] + "-" + (fila + 1));
     }
     
+    // ** CORRECCIÓN: Usar módulo para obtener la fila (0-4) **
     private int getFilaActual() {
         // Calcula la fila actual (0 a 4)
-        return (indiceActual < 2) ? indiceActual : (indiceActual < 5) ? indiceActual - 1 : indiceActual - 2;
+        return indiceActual % 5;
     }
     
     public int[][] obtenerCartonManual() {
@@ -110,12 +116,14 @@ public class ControlManual extends javax.swing.JDialog {
         return letras[columna];
     }
     
+    // ** CORRECCIÓN: Manejo del salto de N-3 (índice 12) **
     private void siguientePosicion() {
-        if (indiceActual == 2) {
-            // Saltar la posición central (N-3)
+        indiceActual++; // Mover a la siguiente posición
+        
+        // Saltar la posición central (N-3), que corresponde al índice lineal 12
+        if (indiceActual == 12) {
             indiceActual++;
         }
-        indiceActual++; // Mover a la siguiente posición
         
         if (indiceActual >= 25) {
             // Finalizado el ingreso
@@ -125,7 +133,8 @@ public class ControlManual extends javax.swing.JDialog {
             this.dispose(); // Cerrar el diálogo
         } else {
             actualizarEtiquetaIndice();
-            jTextField1.setText("");
+            // Esto ya estaba, asegura que se borre el texto al avanzar.
+            jTextField1.setText(""); 
         }
     }
     /**
@@ -164,10 +173,14 @@ public class ControlManual extends javax.swing.JDialog {
             }
         });
 
-        jPanel2.setBackground(new java.awt.Color(209, 179, 174));
+        jPanel2.setBackground(new java.awt.Color(0, 102, 153));
 
+        jLabel2.setFont(new java.awt.Font("Segoe UI Emoji", 1, 12)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Ingresar Manual");
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI Black", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Indice-⬇");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -230,7 +243,7 @@ public class ControlManual extends javax.swing.JDialog {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(36, 36, 36)
                         .addComponent(indice, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
 
@@ -252,8 +265,10 @@ public class ControlManual extends javax.swing.JDialog {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         
-        try {
+       try {
             int numero = Integer.parseInt(jTextField1.getText().trim());
+            
+            // Usamos el índice lineal para calcular la posición real en la matriz
             int columna = indiceActual / 5;
             int fila = indiceActual % 5;
             
@@ -261,19 +276,29 @@ public class ControlManual extends javax.swing.JDialog {
                 cartonManual[fila][columna] = numero;
                 previsualizarCarton();
                 siguientePosicion();
+            } else {
+                 // Si el número no es válido (rango/repetido), se vacía el campo para reintentar.
+                jTextField1.setText("");
             }
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, 
                     "Debe ingresar un número entero válido.",
                     "Error de Formato", JOptionPane.ERROR_MESSAGE);
+            // ** CORRECCIÓN: Vaciar campo después de error de formato **
+            jTextField1.setText(""); 
         }
+        
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {                                            
         
         {//GEN-FIRST:event_jTextField1ActionPerformed
+       
+            {
         jButton1ActionPerformed(evt);
-        }//GEN-LAST:event_jTextField1ActionPerformed
+        }
+            
+        }                                           
         
     }//GEN-LAST:event_jTextField1ActionPerformed
 
