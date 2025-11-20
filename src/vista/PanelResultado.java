@@ -119,6 +119,26 @@ public void limpiarGanador() {
     Label_Resultado.setText("0"); 
     
 }
+public void generarNumeroAleatorioConEspera() {
+    // Generar un número aleatorio entre 0 y 75
+    int numeroAleatorio = (int) (Math.random() * 76); // 0 a 75 inclusive
+    
+    // Mostrar el número en el panel
+    mostrarNumero(numeroAleatorio);
+    
+    // Crear un Timer que espere 3 segundos y luego limpie el panel
+    javax.swing.Timer timer = new javax.swing.Timer(3000, new java.awt.event.ActionListener() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            // Limpiar el panel después de 3 segundos
+            mostrarNumero(0); // Muestra "-" nuevamente
+        }
+    });
+    
+    // El timer solo se ejecuta una vez
+    timer.setRepeats(false);
+    timer.start();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.

@@ -11,6 +11,10 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private vista.PanelCartones panelCartones;
     private vista.PanelTablero panelTablero;
     private vista.PanelResultado panelResultado;
+    private java.util.Set<Integer> numerosGenerados = new java.util.HashSet<>();
+    private java.util.Random random = new java.util.Random();
+    private javax.swing.Timer timerGenerador = null;
+    private boolean generandoNumeros = false;
     
     // ⭐ AGREGAR: Controlador MVC
     private ControladorBingo controlador; // Variable agregada
@@ -173,6 +177,7 @@ private void configurarEventos() {
         jButton2 = new javax.swing.JButton();
         MarcarNumeroManual = new javax.swing.JTextField();
         marcar = new javax.swing.JButton();
+        txtNum = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         BtnCarbiarCarton = new javax.swing.JButton();
@@ -282,20 +287,28 @@ private void configurarEventos() {
 
         marcar.setText("Buscar");
 
+        txtNum.setText("Iniciar contador");
+        txtNum.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNumActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(botonCrear, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                    .addComponent(txtNum, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addGap(35, 35, 35)
-                        .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(MarcarNumeroManual, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(marcar)
                         .addGap(79, 79, 79)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -306,16 +319,21 @@ private void configurarEventos() {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(43, Short.MAX_VALUE)
+                .addContainerGap(48, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ComboModo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(MarcarNumeroManual, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(4, 4, 4)
+                .addGap(10, 10, 10)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
                     .addComponent(marcar))
                 .addContainerGap())
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(botonCrear, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtNum, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setText("Cartón = ");
@@ -489,7 +507,73 @@ private void configurarEventos() {
         // TODO add your handling code here:
     }//GEN-LAST:event_MarcarNumeroManualActionPerformed
 
+    private void txtNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumActionPerformed
+      if (generandoNumeros) {
+        detenerGeneracionNumeros();
+        return;
+    }
     
+    // Verificar si ya se generaron todos los números (0-75 = 76 números)
+    if (numerosGenerados.size() >= 76) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "¡Se han generado todos los números posibles!", 
+            "Juego Completado", 
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    
+    generandoNumeros = true;
+    generarProximoNumero(); 
+
+    }//GEN-LAST:event_txtNumActionPerformed
+private void generarProximoNumero() {
+     if (numerosGenerados.size() >= 76) {
+        detenerGeneracionNumeros();
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "¡Se han generado todos los números posibles!", 
+            "Juego Completado", 
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        return;
+    }
+    
+    // Generar número aleatorio que no haya sido generado
+    int numeroAleatorio;
+    do {
+        numeroAleatorio = random.nextInt(76); // 0 a 75 inclusive
+    } while (numerosGenerados.contains(numeroAleatorio));
+    
+    // Agregar el número a los ya generados
+    numerosGenerados.add(numeroAleatorio);
+    
+    // Mostrar el número en el PanelResultado
+    panelResultado.mostrarNumero(numeroAleatorio);
+    
+    // ⭐ NUEVO: Marcar el número en el PanelTablero (solo si es mayor a 0)
+    if (numeroAleatorio > 0) {
+        panelTablero.marcarNumero(numeroAleatorio);
+    }
+    
+    // Programar el siguiente número en 3 segundos
+    timerGenerador = new javax.swing.Timer(3000, new java.awt.event.ActionListener() {
+        @Override
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            if (generandoNumeros) {
+                generarProximoNumero(); // Generar el siguiente número
+            }
+        }
+    });
+    
+    timerGenerador.setRepeats(false);
+    timerGenerador.start();
+}
+private void detenerGeneracionNumeros() {
+    generandoNumeros = false;
+    if (timerGenerador != null) {
+        timerGenerador.stop();
+    }
+    panelResultado.mostrarNumero(0); 
+ }
+
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
         // Lógica para cambiar el modo a normal
         controlador.cambiarModoJuego("NORMAL");
@@ -568,5 +652,6 @@ public static void main(String args[]) {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JButton marcar;
+    private javax.swing.JButton txtNum;
     // End of variables declaration//GEN-END:variables
 }
