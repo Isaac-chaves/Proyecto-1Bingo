@@ -9,14 +9,92 @@ package vista;
  * @author isaac
  */
 public class PanelTablero extends javax.swing.JPanel {
-
+private final javax.swing.JPanel[] panelesMarcador = new javax.swing.JPanel[75];
     /**
      * Creates new form PanelTablero
      */
     public PanelTablero() {
         initComponents();
+        inicializarPanelesMarcador();
     } 
-
+private void inicializarPanelesMarcador() {
+    // Inicialización de la lista de paneles para acceso por índice (0-74)
+    panelesMarcador[0] = panelMarcador_1;
+    panelesMarcador[1] = panelMarcador_2;
+    panelesMarcador[2] = panelMarcador_3;
+    panelesMarcador[3] = panelMarcador_4;
+    panelesMarcador[4] = panelMarcador_5;
+    panelesMarcador[5] = panelMarcador_6;
+    panelesMarcador[6] = panelMarcador_7;
+    panelesMarcador[7] = panelMarcador_8;
+    panelesMarcador[8] = panelMarcador_9;
+    panelesMarcador[9] = panelMarcador_10;
+    panelesMarcador[10] = panelMarcador_11;
+    panelesMarcador[11] = panelMarcador_12;
+    panelesMarcador[12] = panelMarcador_13;
+    panelesMarcador[13] = panelMarcador_14;
+    panelesMarcador[14] = panelMarcador_15;
+    panelesMarcador[15] = panelMarcador_16;
+    panelesMarcador[16] = panelMarcador_17;
+    panelesMarcador[17] = panelMarcador_18;
+    panelesMarcador[18] = panelMarcador_19;
+    panelesMarcador[19] = panelMarcador_20;
+    panelesMarcador[20] = panelMarcador_21;
+    panelesMarcador[21] = panelMarcador_22;
+    panelesMarcador[22] = panelMarcador_23;
+    panelesMarcador[23] = panelMarcador_24;
+    panelesMarcador[24] = panelMarcador_25;
+    panelesMarcador[25] = panelMarcador_26;
+    panelesMarcador[26] = panelMarcador_27;
+    panelesMarcador[27] = panelMarcador_28;
+    panelesMarcador[28] = panelMarcador_29;
+    panelesMarcador[29] = panelMarcador_30;
+    panelesMarcador[30] = panelMarcador_31;
+    panelesMarcador[31] = panelMarcador_32;
+    panelesMarcador[32] = panelMarcador_33;
+    panelesMarcador[33] = panelMarcador_34;
+    panelesMarcador[34] = panelMarcador_35;
+    panelesMarcador[35] = panelMarcador_36;
+    panelesMarcador[36] = panelMarcador_37;
+    panelesMarcador[37] = panelMarcador_38;
+    panelesMarcador[38] = panelMarcador_39;
+    panelesMarcador[39] = panelMarcador_40;
+    panelesMarcador[40] = panelMarcador_41;
+    panelesMarcador[41] = panelMarcador_42;
+    panelesMarcador[42] = panelMarcador_43;
+    panelesMarcador[43] = panelMarcador_44;
+    panelesMarcador[44] = panelMarcador_45;
+    panelesMarcador[45] = panelMarcador_46;
+    panelesMarcador[46] = panelMarcador_47;
+    panelesMarcador[47] = panelMarcador_48;
+    panelesMarcador[48] = panelMarcador_49;
+    panelesMarcador[49] = panelMarcador_50;
+    panelesMarcador[50] = panelMarcador_51;
+    panelesMarcador[51] = panelMarcador_52;
+    panelesMarcador[52] = panelMarcador_53;
+    panelesMarcador[53] = panelMarcador_54;
+    panelesMarcador[54] = panelMarcador_55;
+    panelesMarcador[55] = panelMarcador_56;
+    panelesMarcador[56] = panelMarcador_57;
+    panelesMarcador[57] = panelMarcador_58;
+    panelesMarcador[58] = panelMarcador_59;
+    panelesMarcador[59] = panelMarcador_60;
+    panelesMarcador[60] = panelMarcador_61;
+    panelesMarcador[61] = panelMarcador_62;
+    panelesMarcador[62] = panelMarcador_63;
+    panelesMarcador[63] = panelMarcador_64;
+    panelesMarcador[64] = panelMarcador_65;
+    panelesMarcador[65] = panelMarcador_66;
+    panelesMarcador[66] = panelMarcador_67;
+    panelesMarcador[67] = panelMarcador_68;
+    panelesMarcador[68] = panelMarcador_69;
+    panelesMarcador[69] = panelMarcador_70;
+    panelesMarcador[70] = panelMarcador_71;
+    panelesMarcador[71] = panelMarcador_72;
+    panelesMarcador[72] = panelMarcador_73;
+    panelesMarcador[73] = panelMarcador_74;
+    panelesMarcador[74] = panelMarcador_75;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -178,7 +256,7 @@ public class PanelTablero extends javax.swing.JPanel {
         panelMarcador_75 = new javax.swing.JPanel();
         Num_75 = new javax.swing.JLabel();
 
-        TableroConNumero.setBackground(new java.awt.Color(51, 153, 255));
+        TableroConNumero.setBackground(new java.awt.Color(77, 102, 126));
 
         panelMarcador_1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -1798,7 +1876,7 @@ public class PanelTablero extends javax.swing.JPanel {
                         .addComponent(panelMarcador_74, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelMarcador_75, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         TableroConNumeroLayout.setVerticalGroup(
             TableroConNumeroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1892,7 +1970,7 @@ public class PanelTablero extends javax.swing.JPanel {
                     .addComponent(panelMarcador_73, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelMarcador_74, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(panelMarcador_75, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(85, 85, 85))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -1906,7 +1984,7 @@ public class PanelTablero extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(TableroConNumero, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(TableroConNumero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
     }// </editor-fold>//GEN-END:initComponents
 

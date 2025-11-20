@@ -29,7 +29,7 @@ public class PanelResultado extends javax.swing.JPanel {
         jPanel1 = new javax.swing.JPanel();
         Label_Resultado = new javax.swing.JLabel();
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(new java.awt.Color(214, 214, 209));
 
         Label_Resultado.setFont(new java.awt.Font("Tw Cen MT", 1, 48)); // NOI18N
         Label_Resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

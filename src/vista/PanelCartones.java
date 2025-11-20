@@ -4,6 +4,8 @@
  */
 package vista;
 
+import java.awt.Color;
+
 /**
  *
  * @author isaac
@@ -16,7 +18,40 @@ public class PanelCartones extends javax.swing.JPanel {
     public PanelCartones() {
         initComponents();
     }
+/**
+     * Este método cambia el color de fondo de los paneles a rojo.
+     */
+    public void pintarRojo() {
+        Color rojo = Color.RED;
 
+        CartonCambiacolor1.setBackground(rojo);
+        CartonCambiacolor2.setBackground(rojo);
+        CartonCambiacolor3.setBackground(rojo);
+        CartonCambiacolor4.setBackground(rojo);
+        CartonCambiacolor5.setBackground(rojo);
+        CartonCambiacolor6.setBackground(rojo);
+        CartonCambiacolor7.setBackground(rojo);
+        CartonCambiacolor8.setBackground(rojo);
+        CartonCambiacolor9.setBackground(rojo);
+        CartonCambiacolor10.setBackground(rojo);
+        CartonCambiacolor11.setBackground(rojo);
+        CartonCambiacolor12.setBackground(rojo);
+        CartonCambiacolor13.setBackground(rojo);
+        CartonCambiacolor14.setBackground(rojo);
+        CartonCambiacolor15.setBackground(rojo);
+        CartonCambiacolor16.setBackground(rojo);
+        CartonCambiacolor17.setBackground(rojo);
+        CartonCambiacolor18.setBackground(rojo);
+        CartonCambiacolor19.setBackground(rojo);
+        CartonCambiacolor20.setBackground(rojo);
+        CartonCambiacolor21.setBackground(rojo);
+        CartonCambiacolor22.setBackground(rojo);
+        CartonCambiacolor23.setBackground(rojo);
+        CartonCambiacolor24.setBackground(rojo);
+        CartonCambiacolor25.setBackground(rojo);
+
+        this.repaint(); // Fuerza el repintado del panel para mostrar el color
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,13 +114,22 @@ public class PanelCartones extends javax.swing.JPanel {
         CartonCambiacolor25 = new javax.swing.JPanel();
         ContenedorNumCarton25 = new javax.swing.JLabel();
 
-        FondoCarton.setBackground(new java.awt.Color(204, 204, 255));
+        FondoCarton.setBackground(new java.awt.Color(51, 51, 51));
 
         IconBingoSuperior.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/superiorBingo.png.jpg"))); // NOI18N
+        IconBingoSuperior.addAncestorListener(new javax.swing.event.AncestorListener() {
+            public void ancestorAdded(javax.swing.event.AncestorEvent evt) {
+                IconBingoSuperiorAncestorAdded(evt);
+            }
+            public void ancestorMoved(javax.swing.event.AncestorEvent evt) {
+            }
+            public void ancestorRemoved(javax.swing.event.AncestorEvent evt) {
+            }
+        });
 
         ContenedorNumCarton1.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton1.setText("1");
+        ContenedorNumCarton1.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor1Layout = new javax.swing.GroupLayout(CartonCambiacolor1);
         CartonCambiacolor1.setLayout(CartonCambiacolor1Layout);
@@ -106,7 +150,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton2.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton2.setText("1");
+        ContenedorNumCarton2.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor2Layout = new javax.swing.GroupLayout(CartonCambiacolor2);
         CartonCambiacolor2.setLayout(CartonCambiacolor2Layout);
@@ -127,7 +171,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton3.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton3.setText("1");
+        ContenedorNumCarton3.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor3Layout = new javax.swing.GroupLayout(CartonCambiacolor3);
         CartonCambiacolor3.setLayout(CartonCambiacolor3Layout);
@@ -148,7 +192,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton4.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton4.setText("1");
+        ContenedorNumCarton4.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor4Layout = new javax.swing.GroupLayout(CartonCambiacolor4);
         CartonCambiacolor4.setLayout(CartonCambiacolor4Layout);
@@ -169,7 +213,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton5.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton5.setText("1");
+        ContenedorNumCarton5.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor5Layout = new javax.swing.GroupLayout(CartonCambiacolor5);
         CartonCambiacolor5.setLayout(CartonCambiacolor5Layout);
@@ -190,7 +234,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton6.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton6.setText("1");
+        ContenedorNumCarton6.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor6Layout = new javax.swing.GroupLayout(CartonCambiacolor6);
         CartonCambiacolor6.setLayout(CartonCambiacolor6Layout);
@@ -211,7 +255,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton7.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton7.setText("1");
+        ContenedorNumCarton7.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor7Layout = new javax.swing.GroupLayout(CartonCambiacolor7);
         CartonCambiacolor7.setLayout(CartonCambiacolor7Layout);
@@ -232,7 +276,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton8.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton8.setText("1");
+        ContenedorNumCarton8.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor8Layout = new javax.swing.GroupLayout(CartonCambiacolor8);
         CartonCambiacolor8.setLayout(CartonCambiacolor8Layout);
@@ -253,7 +297,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton9.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton9.setText("1");
+        ContenedorNumCarton9.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor9Layout = new javax.swing.GroupLayout(CartonCambiacolor9);
         CartonCambiacolor9.setLayout(CartonCambiacolor9Layout);
@@ -274,7 +318,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton10.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton10.setText("1");
+        ContenedorNumCarton10.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor10Layout = new javax.swing.GroupLayout(CartonCambiacolor10);
         CartonCambiacolor10.setLayout(CartonCambiacolor10Layout);
@@ -295,7 +339,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton11.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton11.setText("1");
+        ContenedorNumCarton11.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor11Layout = new javax.swing.GroupLayout(CartonCambiacolor11);
         CartonCambiacolor11.setLayout(CartonCambiacolor11Layout);
@@ -316,7 +360,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton12.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton12.setText("1");
+        ContenedorNumCarton12.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor12Layout = new javax.swing.GroupLayout(CartonCambiacolor12);
         CartonCambiacolor12.setLayout(CartonCambiacolor12Layout);
@@ -337,7 +381,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton13.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton13.setText("1");
+        ContenedorNumCarton13.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor13Layout = new javax.swing.GroupLayout(CartonCambiacolor13);
         CartonCambiacolor13.setLayout(CartonCambiacolor13Layout);
@@ -379,7 +423,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton15.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton15.setText("1");
+        ContenedorNumCarton15.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor15Layout = new javax.swing.GroupLayout(CartonCambiacolor15);
         CartonCambiacolor15.setLayout(CartonCambiacolor15Layout);
@@ -400,7 +444,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton16.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton16.setText("1");
+        ContenedorNumCarton16.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor16Layout = new javax.swing.GroupLayout(CartonCambiacolor16);
         CartonCambiacolor16.setLayout(CartonCambiacolor16Layout);
@@ -421,7 +465,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton17.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton17.setText("1");
+        ContenedorNumCarton17.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor17Layout = new javax.swing.GroupLayout(CartonCambiacolor17);
         CartonCambiacolor17.setLayout(CartonCambiacolor17Layout);
@@ -442,7 +486,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton18.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton18.setText("1");
+        ContenedorNumCarton18.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor18Layout = new javax.swing.GroupLayout(CartonCambiacolor18);
         CartonCambiacolor18.setLayout(CartonCambiacolor18Layout);
@@ -463,7 +507,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton19.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton19.setText("1");
+        ContenedorNumCarton19.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor19Layout = new javax.swing.GroupLayout(CartonCambiacolor19);
         CartonCambiacolor19.setLayout(CartonCambiacolor19Layout);
@@ -484,7 +528,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton20.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton20.setText("1");
+        ContenedorNumCarton20.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor20Layout = new javax.swing.GroupLayout(CartonCambiacolor20);
         CartonCambiacolor20.setLayout(CartonCambiacolor20Layout);
@@ -505,7 +549,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton21.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton21.setText("1");
+        ContenedorNumCarton21.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor21Layout = new javax.swing.GroupLayout(CartonCambiacolor21);
         CartonCambiacolor21.setLayout(CartonCambiacolor21Layout);
@@ -526,7 +570,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton22.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton22.setText("1");
+        ContenedorNumCarton22.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor22Layout = new javax.swing.GroupLayout(CartonCambiacolor22);
         CartonCambiacolor22.setLayout(CartonCambiacolor22Layout);
@@ -547,7 +591,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton23.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton23.setText("1");
+        ContenedorNumCarton23.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor23Layout = new javax.swing.GroupLayout(CartonCambiacolor23);
         CartonCambiacolor23.setLayout(CartonCambiacolor23Layout);
@@ -568,7 +612,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton24.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton24.setText("1");
+        ContenedorNumCarton24.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor24Layout = new javax.swing.GroupLayout(CartonCambiacolor24);
         CartonCambiacolor24.setLayout(CartonCambiacolor24Layout);
@@ -589,7 +633,7 @@ public class PanelCartones extends javax.swing.JPanel {
 
         ContenedorNumCarton25.setFont(new java.awt.Font("Segoe UI Black", 1, 18)); // NOI18N
         ContenedorNumCarton25.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ContenedorNumCarton25.setText("1");
+        ContenedorNumCarton25.setText("0");
 
         javax.swing.GroupLayout CartonCambiacolor25Layout = new javax.swing.GroupLayout(CartonCambiacolor25);
         CartonCambiacolor25.setLayout(CartonCambiacolor25Layout);
@@ -617,7 +661,7 @@ public class PanelCartones extends javax.swing.JPanel {
                 .addComponent(IconBingoSuperior)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, FondoCartonLayout.createSequentialGroup()
-                .addContainerGap(40, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(FondoCartonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(CartonCambiacolor20, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CartonCambiacolor15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -720,7 +764,7 @@ public class PanelCartones extends javax.swing.JPanel {
                     .addComponent(CartonCambiacolor23, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CartonCambiacolor24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CartonCambiacolor25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -734,6 +778,10 @@ public class PanelCartones extends javax.swing.JPanel {
             .addComponent(FondoCarton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void IconBingoSuperiorAncestorAdded(javax.swing.event.AncestorEvent evt) {//GEN-FIRST:event_IconBingoSuperiorAncestorAdded
+        // TODO add your handling code here:
+    }//GEN-LAST:event_IconBingoSuperiorAncestorAdded
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
