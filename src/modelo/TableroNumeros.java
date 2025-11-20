@@ -53,4 +53,8 @@ public class TableroNumeros {
     public Integer getUltimoNumero() {
         return ultimoNumero;
     }
-} 
+
+    public void limpiarNumerosCantados() {
+        numerosCantados.clear(); // si tu lista se llama numerosCantados
+    } 
+}

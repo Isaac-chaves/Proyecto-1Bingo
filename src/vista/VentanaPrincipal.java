@@ -278,6 +278,11 @@ private void configurarEventos() {
         });
 
         jButton2.setText("Reiniciar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         MarcarNumeroManual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -526,6 +531,10 @@ private void configurarEventos() {
     generarProximoNumero(); 
 
     }//GEN-LAST:event_txtNumActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton2ActionPerformed
 private void generarProximoNumero() {
      if (numerosGenerados.size() >= 76) {
         detenerGeneracionNumeros();
