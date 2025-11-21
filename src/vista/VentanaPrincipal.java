@@ -90,7 +90,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
 
         jButton2.addActionListener(e -> controlador.reiniciarJuego());
 
-        marcar.addActionListener(e -> {
+        txtnuevo.addActionListener(e -> {
             controlador.buscarCarton(MarcarNumeroManual.getText());
         });
 
@@ -131,7 +131,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         ComboModo = new javax.swing.JComboBox<>();
         jButton2 = new javax.swing.JButton();
         MarcarNumeroManual = new javax.swing.JTextField();
-        marcar = new javax.swing.JButton();
+        txtnuevo = new javax.swing.JButton();
         txtNum = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -245,7 +245,12 @@ public class VentanaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        marcar.setText("Buscar");
+        txtnuevo.setText("Agregar numero");
+        txtnuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtnuevoActionPerformed(evt);
+            }
+        });
 
         txtNum.setText("Iniciar contador");
         txtNum.addActionListener(new java.awt.event.ActionListener() {
@@ -269,7 +274,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addComponent(MarcarNumeroManual, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(38, 38, 38))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(marcar)
+                        .addComponent(txtnuevo)
                         .addGap(79, 79, 79)))
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(ComboModo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -286,7 +291,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2)
-                    .addComponent(marcar))
+                    .addComponent(txtnuevo))
                 .addContainerGap())
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(16, 16, 16)
@@ -351,7 +356,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(ContendorResultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contenedorTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -485,8 +490,107 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNumActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+  reiniciarNumerosGenerados();
     }//GEN-LAST:event_jButton2ActionPerformed
+public void reiniciarNumerosGenerados() {
+    // Detener la generación
+    detenerGeneracionNumeros();
+    
+    // Limpiar los números generados
+    numerosGenerados.clear();
+    
+    // Reiniciar el panel resultado
+    panelResultado.mostrarNumero(0);
+    
+    // ⭐ MODIFICACIÓN: Habilitar ambos botones al reiniciar
+    txtNum.setEnabled(true);
+    txtnuevo.setEnabled(true); // Desbloquear el botón manual
+    
+    // Restaurar el texto del botón
+    txtNum.setText("Iniciar contador");
+    
+    // Limpiar el campo de texto
+    MarcarNumeroManual.setText("");
+    
+    // Mensaje de confirmación
+    javax.swing.JOptionPane.showMessageDialog(this, 
+        "Juego reiniciado correctamente", 
+        "Reinicio", 
+        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+}
+
+private void detenerGeneracionNumeros() {
+    generandoNumeros = false;
+}
+
+private void generacionCompletada() {
+    generandoNumeros = false;
+    txtNum.setText("Iniciar contador");
+    txtNum.setEnabled(false);
+}
+
+    private void txtnuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtnuevoActionPerformed
+         String texto = MarcarNumeroManual.getText().trim();
+    
+  
+    if (texto.isEmpty()) {
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Por favor ingresa un número", 
+            "Campo vacío", 
+            javax.swing.JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    
+    try {
+        int numero = Integer.parseInt(texto);
+        if (numero < 1 || numero > 75) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "El número debe estar entre 1 y 75", 
+                "Número inválido", 
+                javax.swing.JOptionPane.WARNING_MESSAGE);
+            MarcarNumeroManual.setText(""); 
+            return;
+        }
+        
+        if (numerosGenerados.contains(numero)) {
+            javax.swing.JOptionPane.showMessageDialog(this, 
+                "Este número ya fue generado", 
+                "Número duplicado", 
+                javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            MarcarNumeroManual.setText(""); // Limpiar el campo
+            return;
+        }
+        
+       
+        numerosGenerados.add(numero);
+        
+        
+        panelTablero.marcarNumero(numero);
+        
+        
+        panelResultado.mostrarNumero(numero);
+        
+       
+        MarcarNumeroManual.setText("");
+        
+       
+        if (numerosGenerados.size() == 1) {
+            txtNum.setEnabled(false);
+        }
+        
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Número " + numero + " marcado correctamente", 
+            "Éxito", 
+            javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
+    } catch (NumberFormatException e) { // Si el usuario ingresa algo que no es un número
+        javax.swing.JOptionPane.showMessageDialog(this, 
+            "Debes ingresar un número válido", 
+            "Error de entrada", 
+            javax.swing.JOptionPane.ERROR_MESSAGE);
+        MarcarNumeroManual.setText(""); 
+    }
+    }//GEN-LAST:event_txtnuevoActionPerformed
     private void generarProximoNumero() {
         if (numerosGenerados.size() >= 76) {
             detenerGeneracionNumeros();
@@ -523,13 +627,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
         timerGenerador.start();
     }
 
-    private void detenerGeneracionNumeros() {
-        generandoNumeros = false;
-        if (timerGenerador != null) {
-            timerGenerador.stop();
-        }
-        panelResultado.mostrarNumero(0);
-    }
+    
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
 
@@ -608,7 +706,7 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JButton marcar;
     private javax.swing.JButton txtNum;
+    private javax.swing.JButton txtnuevo;
     // End of variables declaration//GEN-END:variables
 }
