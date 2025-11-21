@@ -15,4 +15,4 @@ public class VictoriaCuatroEsquinas implements EstrategiaVictoria {
         boolean[][] m = c.getMarcados();
         return m[0][0] && m[0][4] && m[4][0] && m[4][4];
     }
-} 
+}  

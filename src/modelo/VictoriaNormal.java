@@ -15,7 +15,7 @@ public class VictoriaNormal implements EstrategiaVictoria {
 
         boolean[][] m = c.getMarcados();
 
-        // Horizontal
+        // H
         for (int i = 0; i < 5; i++) {
             boolean ok = true;
             for (int j = 0; j < 5; j++) {
@@ -28,7 +28,7 @@ public class VictoriaNormal implements EstrategiaVictoria {
             }
         }
 
-        // Vertical
+        // V
         for (int j = 0; j < 5; j++) {
             boolean ok = true;
             for (int i = 0; i < 5; i++) {
@@ -41,7 +41,7 @@ public class VictoriaNormal implements EstrategiaVictoria {
             }
         }
 
-        // Diagonales
+        // D
         boolean diag1 = true, diag2 = true;
         for (int i = 0; i < 5; i++) {
             if (!m[i][i]) {
@@ -55,6 +55,6 @@ public class VictoriaNormal implements EstrategiaVictoria {
             return true;
         }
 
-        return false; // ya no se incluye la verificación de las 4 esquinas
-    }
+        return false; 
+    } 
 } 

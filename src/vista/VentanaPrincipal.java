@@ -2,12 +2,8 @@ package vista;
 
 import controlador.ControladorBingo;
 
-/**
- * Ventana principal del juego de Bingo
- * @author isaac
- */
 public class VentanaPrincipal extends javax.swing.JFrame {
-    // Variables de los paneles a insertar
+
     private vista.PanelCartones panelCartones;
     private vista.PanelTablero panelTablero;
     private vista.PanelResultado panelResultado;
@@ -15,143 +11,102 @@ public class VentanaPrincipal extends javax.swing.JFrame {
     private java.util.Random random = new java.util.Random();
     private javax.swing.Timer timerGenerador = null;
     private boolean generandoNumeros = false;
-    
-    // ⭐ AGREGAR: Controlador MVC
-    private ControladorBingo controlador; // Variable agregada
-   
+
+    private ControladorBingo controlador;
+
     public VentanaPrincipal() {
         initComponents();
         inicializarPaneles();
         configurarMenuTema();
         aplicarTema(true);
-        
-        // ⭐ AGREGAR: Inicializar controlador
-        this.controlador = new ControladorBingo(this); // Inicializado
-        configurarEventos(); // Método agregado
+
+        this.controlador = new ControladorBingo(this);
+        configurarEventos();
     }
 
     public void inicializarPaneles() {
         panelCartones = new vista.PanelCartones();
-        panelCartones.setBounds(0, 0, ContenedorCarton.getWidth(), 
-                                ContenedorCarton.getHeight());
+        panelCartones.setBounds(0, 0, ContenedorCarton.getWidth(),
+                ContenedorCarton.getHeight());
         ContenedorCarton.add(panelCartones);
-        
+
         panelTablero = new vista.PanelTablero();
         contenedorTablero.setLayout(new java.awt.BorderLayout());
         contenedorTablero.add(panelTablero, java.awt.BorderLayout.CENTER);
-        
+
         panelResultado = new vista.PanelResultado();
         ContendorResultado.setLayout(new java.awt.BorderLayout());
         ContendorResultado.add(panelResultado, java.awt.BorderLayout.CENTER);
     }
-    
-    /**
-     * Configura los ActionListeners y otros manejadores de eventos.
-     * El controlador será el encargado de añadir la lógica.
-     */
-    // ===========================================
-    // GETTERS PARA LOS PANELES Y CONTROLADOR
-    // ===========================================
-    
-    /**
-     * @return El panel que contiene los cartones.
-     */
+
     public PanelCartones getPanelCartones() {
         return panelCartones;
     }
 
-    /**
-     * @return El panel que muestra el tablero de números llamados.
-     */
     public PanelTablero getPanelTablero() {
         return panelTablero;
     }
 
-    /**
-     * @return El panel que muestra el último número extraído.
-     */
     public PanelResultado getPanelResultado() {
         return panelResultado;
     }
 
-    /**
-     * @return El controlador del juego.
-     */
     public ControladorBingo getControlador() {
         return controlador;
     }
 
-    // ===========================================
-    // GETTERS PARA COMPONENTES DE VISTAS (SI ES NECESARIO EN EL CONTROLADOR)
-    // ===========================================
-    
-    // ... (Puedes agregar getters para otros componentes como botonCrear, ComboModo, etc. si el controlador los necesita)
-    
-    
-    // --- MÉTODOS ADICIONALES DEL SNIPPET ---
     public void configurarMenuTema() {
-        // Lógica de configuración de menú (no proporcionada)
+
     }
 
     public void aplicarTema(boolean esOscuro) {
-        // Lógica de aplicación de tema (no proporcionada)
+
     }
+
     public void actualizarLabelCarton(String texto) {
         jLabel1.setText(texto);
     }
-    /**
- * Configura los ActionListeners y otros manejadores de eventos.
- */
-private void configurarEventos() {
-    // Botón crear cartón
-    botonCrear.addActionListener(e -> {
-        String modo = (String) ComboModo.getSelectedItem();
-        if ("Manual".equals(modo)) {
-            // Abrir diálogo manual
-            ControlManual dialogo = new ControlManual(this, true);
-            dialogo.setVisible(true);
-            int[][] carton = dialogo.obtenerCartonManual();
-            if (carton != null) {
-                controlador.crearCartonManual(carton);
+
+    private void configurarEventos() {
+
+        botonCrear.addActionListener(e -> {
+            String modo = (String) ComboModo.getSelectedItem();
+            if ("Manual".equals(modo)) {
+
+                ControlManual dialogo = new ControlManual(this, true);
+                dialogo.setVisible(true);
+                int[][] carton = dialogo.obtenerCartonManual();
+                if (carton != null) {
+                    controlador.crearCartonManual(carton);
+                }
+            } else {
+                controlador.crearCartonAutomatico();
             }
-        } else {
-            controlador.crearCartonAutomatico();
-        }
-    });
-    
-    // Botón cambiar cartón (adelante)
-    BtnCarbiarCarton.addActionListener(e -> controlador.siguienteCarton());
-    
-    // Botón regresar cartón
-    btnRegresarCarton.addActionListener(e -> controlador.anteriorCarton());
-    
-    // Botón reiniciar
-    jButton2.addActionListener(e -> controlador.reiniciarJuego());
-    
-    // Botón buscar
-    marcar.addActionListener(e -> {
-        controlador.buscarCarton(MarcarNumeroManual.getText());
-    });
-    
-    // Campo de texto (Enter para buscar)
-    MarcarNumeroManual.addActionListener(e -> {
-        controlador.buscarCarton(MarcarNumeroManual.getText());
-    });
-    
- 
-   
-    
-    
-    
-    // Menú items de tema
-    jMenuItem1.addActionListener(e -> {
-        aplicarTema(true); // Tema oscuro
-    });
-    
-    jMenuItem2.addActionListener(e -> {
-        aplicarTema(false); // Tema claro
-    });
-}
+        });
+
+        BtnCarbiarCarton.addActionListener(e -> controlador.siguienteCarton());
+
+        btnRegresarCarton.addActionListener(e -> controlador.anteriorCarton());
+
+        jButton2.addActionListener(e -> controlador.reiniciarJuego());
+
+        marcar.addActionListener(e -> {
+            controlador.buscarCarton(MarcarNumeroManual.getText());
+        });
+
+        MarcarNumeroManual.addActionListener(e -> {
+            controlador.buscarCarton(MarcarNumeroManual.getText());
+        });
+
+        jMenuItem1.addActionListener(e -> {
+            aplicarTema(true);
+        });
+
+        jMenuItem2.addActionListener(e -> {
+            aplicarTema(false);
+        });
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -481,10 +436,8 @@ private void configurarEventos() {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ComboModoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboModoActionPerformed
-        
-     
-        
-        
+
+
     }//GEN-LAST:event_ComboModoActionPerformed
 
     private void jRadioButtonMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem1ActionPerformed
@@ -497,7 +450,7 @@ private void configurarEventos() {
     }//GEN-LAST:event_jRadioButtonMenuItem2ActionPerformed
 
     private void jRadioButtonMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButtonMenuItem3ActionPerformed
-         controlador.cambiarModoJuego("CARTON_LLENO");
+        controlador.cambiarModoJuego("CARTON_LLENO");
     }//GEN-LAST:event_jRadioButtonMenuItem3ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
@@ -505,7 +458,7 @@ private void configurarEventos() {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void botonCrearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonCrearActionPerformed
-       
+
     }//GEN-LAST:event_botonCrearActionPerformed
 
     private void MarcarNumeroManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MarcarNumeroManualActionPerformed
@@ -513,95 +466,90 @@ private void configurarEventos() {
     }//GEN-LAST:event_MarcarNumeroManualActionPerformed
 
     private void txtNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumActionPerformed
-      if (generandoNumeros) {
-        detenerGeneracionNumeros();
-        return;
-    }
-    
-    // Verificar si ya se generaron todos los números (0-75 = 76 números)
-    if (numerosGenerados.size() >= 76) {
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "¡Se han generado todos los números posibles!", 
-            "Juego Completado", 
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        return;
-    }
-    
-    generandoNumeros = true;
-    generarProximoNumero(); 
+        if (generandoNumeros) {
+            detenerGeneracionNumeros();
+            return;
+        }
+
+        if (numerosGenerados.size() >= 76) {
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "¡Se han generado todos los números posibles!",
+                    "Juego Completado",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+
+        generandoNumeros = true;
+        generarProximoNumero();
 
     }//GEN-LAST:event_txtNumActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
-private void generarProximoNumero() {
-     if (numerosGenerados.size() >= 76) {
-        detenerGeneracionNumeros();
-        javax.swing.JOptionPane.showMessageDialog(this, 
-            "¡Se han generado todos los números posibles!", 
-            "Juego Completado", 
-            javax.swing.JOptionPane.INFORMATION_MESSAGE);
-        return;
-    }
-    
-    // Generar número aleatorio que no haya sido generado
-    int numeroAleatorio;
-    do {
-        numeroAleatorio = random.nextInt(76); // 0 a 75 inclusive
-    } while (numerosGenerados.contains(numeroAleatorio));
-    
-    // Agregar el número a los ya generados
-    numerosGenerados.add(numeroAleatorio);
-    
-    // Mostrar el número en el PanelResultado
-    panelResultado.mostrarNumero(numeroAleatorio);
-    
-    // ⭐ NUEVO: Marcar el número en el PanelTablero (solo si es mayor a 0)
-    if (numeroAleatorio > 0) {
-        panelTablero.marcarNumero(numeroAleatorio);
-    }
-    
-    // Programar el siguiente número en 3 segundos
-    timerGenerador = new javax.swing.Timer(3000, new java.awt.event.ActionListener() {
-        @Override
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            if (generandoNumeros) {
-                generarProximoNumero(); // Generar el siguiente número
-            }
+    private void generarProximoNumero() {
+        if (numerosGenerados.size() >= 76) {
+            detenerGeneracionNumeros();
+            javax.swing.JOptionPane.showMessageDialog(this,
+                    "¡Se han generado todos los números posibles!",
+                    "Juego Completado",
+                    javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            return;
         }
-    });
-    
-    timerGenerador.setRepeats(false);
-    timerGenerador.start();
-}
-private void detenerGeneracionNumeros() {
-    generandoNumeros = false;
-    if (timerGenerador != null) {
-        timerGenerador.stop();
+
+        int numeroAleatorio;
+        do {
+            numeroAleatorio = random.nextInt(76);
+        } while (numerosGenerados.contains(numeroAleatorio));
+
+        numerosGenerados.add(numeroAleatorio);
+
+        panelResultado.mostrarNumero(numeroAleatorio);
+
+        if (numeroAleatorio > 0) {
+            panelTablero.marcarNumero(numeroAleatorio);
+        }
+
+        timerGenerador = new javax.swing.Timer(3000, new java.awt.event.ActionListener() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                if (generandoNumeros) {
+                    generarProximoNumero();
+                }
+            }
+        });
+
+        timerGenerador.setRepeats(false);
+        timerGenerador.start();
     }
-    panelResultado.mostrarNumero(0); 
- }
+
+    private void detenerGeneracionNumeros() {
+        generandoNumeros = false;
+        if (timerGenerador != null) {
+            timerGenerador.stop();
+        }
+        panelResultado.mostrarNumero(0);
+    }
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {
-        // Lógica para cambiar el modo a normal
+
         controlador.cambiarModoJuego("NORMAL");
     }
 
     private void CambiarmodeasEsquinasActionPerformed(java.awt.event.ActionEvent evt) {
-        // Lógica para cambiar el modo a esquinas
+
         controlador.cambiarModoJuego("CUATRO_ESQUINAS");
     }
 
     private void CambiarmodeCompletoActionPerformed(java.awt.event.ActionEvent evt) {
-        // Lógica para cambiar el modo a completo
+
         controlador.cambiarModoJuego("CARTON_LLENO");
-    }
-    
+    } 
+
     /**
      * @param args the command line arguments
      */
-public static void main(String args[]) {
+    public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
@@ -631,7 +579,7 @@ public static void main(String args[]) {
             }
         });
 
-}
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCarbiarCarton;
     private javax.swing.JMenuItem CambiarmodeCompleto;

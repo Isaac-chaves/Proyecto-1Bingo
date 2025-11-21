@@ -37,4 +37,4 @@ public class Tombola {
     public boolean ingresarManual(int n) {
         return tablero.agregarNumero(n);
     }
-}
+} 

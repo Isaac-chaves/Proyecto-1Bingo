@@ -6,22 +6,16 @@ import java.awt.Color;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- * Controlador principal que coordina el Modelo y la Vista del juego de Bingo
- */
 public class ControladorBingo {
 
-    // Modelo
     private JuegoBingo juegoBingo;
     private FabricaCartones fabricaCartones;
 
-    // Vista
     private VentanaPrincipal ventanaPrincipal;
     private PanelCartones panelCartones;
     private PanelTablero panelTablero;
     private PanelResultado panelResultado;
 
-    // Estado del juego
     private int indiceCartonActual = 0;
     private boolean juegoEnCurso = false;
 
@@ -30,7 +24,6 @@ public class ControladorBingo {
         this.juegoBingo = new JuegoBingo();
         this.fabricaCartones = new FabricaCartones();
 
-        // Obtener referencias a los paneles
         this.panelCartones = ventana.getPanelCartones();
         this.panelTablero = ventana.getPanelTablero();
         this.panelResultado = ventana.getPanelResultado();
@@ -39,14 +32,10 @@ public class ControladorBingo {
     }
 
     private void inicializarControlador() {
-        // El controlador está listo
+
         actualizarVista();
     }
 
-    // ========== MÉTODOS PARA GESTIONAR CARTONES ==========
-    /**
-     * Crea un cartón manual a partir de una matriz de números
-     */
     public void crearCartonManual(int[][] numeros) {
         try {
             String id = "CARTON-" + (juegoBingo.getCartones().size() + 1);
@@ -69,9 +58,6 @@ public class ControladorBingo {
         }
     }
 
-    /**
-     * Crea un cartón automático
-     */
     public void crearCartonAutomatico() {
         String id = "CARTON-" + (juegoBingo.getCartones().size() + 1);
         Carton nuevoCarton = fabricaCartones.crearCartonAutomatico(id);
@@ -87,9 +73,6 @@ public class ControladorBingo {
                 "Éxito", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /**
-     * Navega al siguiente cartón
-     */
     public void siguienteCarton() {
         List<Carton> cartones = juegoBingo.getCartones();
         if (cartones.isEmpty()) {
@@ -103,9 +86,6 @@ public class ControladorBingo {
         actualizarLabelCarton();
     }
 
-    /**
-     * Navega al cartón anterior
-     */
     public void anteriorCarton() {
         List<Carton> cartones = juegoBingo.getCartones();
         if (cartones.isEmpty()) {
@@ -122,9 +102,6 @@ public class ControladorBingo {
         actualizarLabelCarton();
     }
 
-    /**
-     * Busca un cartón por ID
-     */
     public void buscarCarton(String id) {
         if (id == null || id.trim().isEmpty()) {
             JOptionPane.showMessageDialog(ventanaPrincipal,
@@ -146,10 +123,6 @@ public class ControladorBingo {
                 "Cartón no encontrado: " + id, "Aviso", JOptionPane.WARNING_MESSAGE);
     }
 
-    // ========== MÉTODOS PARA CONTROL DEL JUEGO ==========
-    /**
-     * Genera un número automático (modo automático)
-     */
     public void generarNumeroAutomatico() {
         if (juegoBingo.getCartones().isEmpty()) {
             JOptionPane.showMessageDialog(ventanaPrincipal,
@@ -168,22 +141,15 @@ public class ControladorBingo {
         juegoEnCurso = true;
         int numeroGenerado = juegoBingo.sacarNumeroAutomatico();
 
-        // 1. Marcar el número en el tablero global
         actualizarVistaTablero();
 
-        // ⭐ PASO CLAVE 1: Marcar inmediatamente en el cartón visible (nueva característica)
         panelCartones.marcarCasilla(numeroGenerado);
 
-        // 2. Actualizar el panel de resultado
         actualizarResultado(numeroGenerado);
 
-        // 3. No es necesario llamar a actualizarVistaCarton(), el marcado fue directo.
         verificarGanador();
     }
 
-    /**
-     * Ingresa un número manualmente
-     */
     public void ingresarNumeroManual(String numeroStr) {
         if (juegoBingo.getCartones().isEmpty()) {
             JOptionPane.showMessageDialog(ventanaPrincipal,
@@ -213,16 +179,12 @@ public class ControladorBingo {
 
             juegoEnCurso = true;
 
-            // 1. Marcar el número en el tablero global
             actualizarVistaTablero();
 
-            // ⭐ PASO CLAVE 2: Marcar inmediatamente en el cartón visible (nueva característica)
             panelCartones.marcarCasilla(numero);
 
-            // 2. Actualizar el panel de resultado
             actualizarResultado(numero);
 
-            // 3. No es necesario llamar a actualizarVistaCarton(), el marcado fue directo.
             verificarGanador();
 
         } catch (NumberFormatException e) {
@@ -231,21 +193,18 @@ public class ControladorBingo {
         }
     }
 
-    /**
-     * Reinicia el juego completamente
-     */
     public void reiniciarJuego() {
         int respuesta = JOptionPane.showConfirmDialog(ventanaPrincipal,
                 "¿Está seguro que desea reiniciar el juego?\nSe borrarán los cartones creados.",
                 "Confirmar reinicio", JOptionPane.YES_NO_OPTION);
 
         if (respuesta == JOptionPane.YES_OPTION) {
-            juegoBingo.reiniciarJuego();      // borra todo del modelo
+            juegoBingo.reiniciarJuego();
             juegoBingo.cambiarEstrategiaVictoria("NORMAL");
             juegoEnCurso = false;
             indiceCartonActual = 0;
 
-            panelCartones.limpiarCarton();    // borra cartones de la vista
+            panelCartones.limpiarCarton();
             actualizarVistaTablero();
             actualizarLabelCarton();
             panelResultado.mostrarNumero(0);
@@ -255,11 +214,8 @@ public class ControladorBingo {
                     "Juego reiniciado correctamente",
                     "Reinicio", JOptionPane.INFORMATION_MESSAGE);
         }
-    } 
+    }
 
-    /**
-     * Cambia el modo de juego (estrategia de victoria)
-     */
     public void cambiarModoJuego(String modo) {
         juegoBingo.cambiarEstrategiaVictoria(modo);
         JOptionPane.showMessageDialog(ventanaPrincipal,
@@ -280,46 +236,34 @@ public class ControladorBingo {
         }
     }
 
-    // ========== MÉTODOS DE ACTUALIZACIÓN DE VISTA ==========
     private void actualizarVista() {
         actualizarVistaCarton();
         actualizarVistaTablero();
         actualizarLabelCarton();
     }
 
-    /**
-     * Actualiza el panel de cartones con el cartón actual
-     */
     private void actualizarVistaCarton() {
         List<Carton> cartones = juegoBingo.getCartones();
 
         if (cartones.isEmpty()) {
-            // Si no hay cartones, limpia la vista.
+
             panelCartones.limpiarCarton();
             ventanaPrincipal.actualizarLabelCarton("Sin cartones");
             return;
         }
 
-        // Obtiene el cartón actual basado en el índice
         Carton cartonActual = cartones.get(indiceCartonActual);
 
-        // Obtiene las matrices de números y de estado de marcado
         int[][] numeros = cartonActual.getNumeros();
         boolean[][] marcados = cartonActual.getMarcados();
 
-        // ⭐ LLAMADA CLAVE: Pasa ambos estados al panel. 
-        // PanelCartones debe usar 'marcados' para pintar de rojo.
         panelCartones.mostrarCarton(numeros, marcados);
 
-        // Actualiza la etiqueta de "Cartón X de Y"
         actualizarLabelCarton();
     }
 
-    /**
-     * Actualiza el tablero de números cantados
-     */
     private void actualizarVistaTablero() {
-        // Marcar todos los números cantados
+
         for (int i = 1; i <= 75; i++) {
             if (juegoBingo.getTablero().getNumerosCantados().contains(i)) {
                 panelTablero.marcarNumero(i);
@@ -329,9 +273,6 @@ public class ControladorBingo {
         }
     }
 
-    /**
-     * Actualiza el label que muestra el número de cartón actual
-     */
     private void actualizarLabelCarton() {
         List<Carton> cartones = juegoBingo.getCartones();
         if (!cartones.isEmpty()) {
@@ -342,16 +283,10 @@ public class ControladorBingo {
         }
     }
 
-    /**
-     * Actualiza el panel de resultado con el último número
-     */
     private void actualizarResultado(int numero) {
         panelResultado.mostrarNumero(numero);
     }
 
-    /**
-     * Verifica si hay un ganador y muestra el resultado
-     */
     private void verificarGanador() {
         if (juegoBingo.hayGanador()) {
             Carton ganador = juegoBingo.getCartonGanador();
@@ -367,7 +302,6 @@ public class ControladorBingo {
         }
     }
 
-    // ========== GETTERS ==========
     public JuegoBingo getJuegoBingo() {
         return juegoBingo;
     }
@@ -375,4 +309,4 @@ public class ControladorBingo {
     public boolean isJuegoEnCurso() {
         return juegoEnCurso;
     }
-}
+} 

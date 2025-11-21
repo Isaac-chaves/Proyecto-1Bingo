@@ -3,112 +3,86 @@ package vista;
 import java.awt.Color;
 import javax.swing.ImageIcon; 
 
-/**
- *
- * @author isaac
- */
+
 public class PanelResultado extends javax.swing.JPanel {
 
-    /**
-     * Creates new form PanelResultado
-     */
+    
     public PanelResultado() {
         initComponents();
     }
 
-// Dentro de la clase PanelResultado:
-/**
- * Cambia el tema de color para el panel de resultados.
- * @param esOscuro true para tema oscuro, false para tema claro.
- */
+
 public void cambiarTema(boolean esOscuro) {
     Color fondoPanel, colorTexto;
 
     if (esOscuro) {
-        // Tema Oscuro:
+        
         fondoPanel = new Color(60, 63, 65);
         colorTexto = Color.WHITE;
     } else {
-        // Tema Claro:
-        fondoPanel = new Color(214, 214, 209); // Color claro original
+       
+        fondoPanel = new Color(214, 214, 209); 
         colorTexto = Color.BLACK;
     }
 
     jPanel1.setBackground(fondoPanel);
     Label_Resultado.setForeground(colorTexto);
     
-    // Al cambiar el tema, volvemos a mostrar "0" por defecto y quitamos el icono
-    mostrarNumero(0); // Para resetear la etiqueta
+   
+    mostrarNumero(0); 
 }
-/**
- * Muestra el estado de ganador con un icono/texto especial.
- * @param idGanador ID del cartón ganador
- */
 public void mostrarGanador(String idGanador) {
     Label_Resultado.setText("¡BINGO!");
     Label_Resultado.setForeground(Color.RED);
-    // Opcional: mostrar el icono si existe
-    // mostrarIconoBingoWin();
+    
 }
-    /**
-     * Muestra el número extraído en el centro del panel.
-     * Si es 0, muestra un valor por defecto (ej. "-") o el valor inicial.
-     * @param numero El número extraído (1 a 75) o 0 para limpiar.
-     */
+    
     public void mostrarNumero(int numero) {
         if (numero >= 1 && numero <= 75) {
             Label_Resultado.setText(String.valueOf(numero));
-            Label_Resultado.setIcon(null); // Asegura que no haya icono si se muestra un número
+            Label_Resultado.setIcon(null); 
         } else {
-            // Valor inicial o de reseteo
+            
             Label_Resultado.setText("-"); 
             Label_Resultado.setIcon(null);
         }
     }
     
-    /**
-     * Muestra el estado de ganador con un icono/texto especial.
-     * @param esGanador true si se debe mostrar el estado de ganador.
-     */
+    
     public void mostrarGanador(boolean esGanador) {
         if (esGanador) {
-            // Ejemplo: Muestra "BINGO" y un icono (asume que tienes un recurso de imagen)
+            
             Label_Resultado.setText("BINGO!");
-            // Nota: Aquí se asume la existencia de un icono. Si no tienes uno, 
-            // simplemente usa el texto y cambia el color, por ejemplo:
+            
              Label_Resultado.setForeground(Color.RED);
-            // Label_Resultado.setIcon(new ImageIcon(getClass().getResource("/recursos/bingo_icon.png")));
+           
         } else {
-            // Si el estado de ganador se quita, se puede llamar a mostrarNumero(0) para resetear
+           
             mostrarNumero(0); 
-            // Asegura que el color de texto vuelva a la normalidad si se cambió
-             Label_Resultado.setForeground(Color.BLACK); // O el color de texto del tema actual
+          
+             Label_Resultado.setForeground(Color.BLACK); 
         }
     }
-/**
- * Muestra el icono de la imagen "BingoWin.png" en el Label_Resultado.
- * Elimina el texto actual del label.
- */
+
 public void mostrarIconoBingoWin() {
     try {
-        // *** CAMBIO DE RUTA AQUÍ ***
-        // Se asume que la imagen está en la carpeta "recursos" en la raíz del classpath
+        
         ImageIcon icono = new ImageIcon(getClass().getResource("recursos/BingoWin.png"));
         
-        // Establece el icono en el JLabel
+        
         Label_Resultado.setIcon(icono);
         
-        // Quita el texto para que solo se vea el icono
+        
         Label_Resultado.setText(""); 
         
-        // Asegúrate de que el icono esté centrado si el tamaño del label es mayor que la imagen
+       
         Label_Resultado.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Label_Resultado.setVerticalAlignment(javax.swing.SwingConstants.CENTER);
         
     } catch (Exception e) {
-        // Manejo de error si la imagen no se encuentra (recurso nulo)
+       
         System.err.println("No se pudo cargar la imagen BingoWin.png. Revise la ruta /recursos/BingoWin.png. Error: " + e.getMessage());
-        Label_Resultado.setText("¡WIN!"); // Opcional: mostrar un mensaje alternativo
+        Label_Resultado.setText("¡WIN!");
         Label_Resultado.setIcon(null);
     }
     
@@ -120,22 +94,22 @@ public void limpiarGanador() {
     
 }
 public void generarNumeroAleatorioConEspera() {
-    // Generar un número aleatorio entre 0 y 75
-    int numeroAleatorio = (int) (Math.random() * 76); // 0 a 75 inclusive
     
-    // Mostrar el número en el panel
+    int numeroAleatorio = (int) (Math.random() * 76); 
+    
+ 
     mostrarNumero(numeroAleatorio);
     
-    // Crear un Timer que espere 3 segundos y luego limpie el panel
+   
     javax.swing.Timer timer = new javax.swing.Timer(3000, new java.awt.event.ActionListener() {
         @Override
         public void actionPerformed(java.awt.event.ActionEvent evt) {
-            // Limpiar el panel después de 3 segundos
-            mostrarNumero(0); // Muestra "-" nuevamente
+         
+            mostrarNumero(0); 
         }
     });
     
-    // El timer solo se ejecuta una vez
+     
     timer.setRepeats(false);
     timer.start();
 }

@@ -10,6 +10,12 @@
             <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/vista/PanelCartones.java</file>
             <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/modelo/JuegoBingo.java</file>
             <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/modelo/TableroNumeros.java</file>
+            <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/modelo/Carton.java</file>
+            <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/modelo/VictoriaNormal.java</file>
+            <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/modelo/FabricaCartones.java</file>
+            <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/modelo/EstrategiaVictoria.java</file>
+            <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/modelo/Tombola.java</file>
+            <file>file:/C:/Users/UTN/Documents/Proyecto-1Bingo/src/modelo/VictoriaCartonLleno.java</file>
         </group>
     </open-files>
 </project-private>

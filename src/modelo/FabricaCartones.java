@@ -9,10 +9,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-/**
- *
- * @author UTN
- */
+
 public class FabricaCartones {
     
 
@@ -68,7 +65,7 @@ private List<Integer> generarNumerosParaColumna(int columna) {
     int max = getMaximoColumna(columna);
     List<Integer> todosLosNumeros = new ArrayList<>();
     for (int i = min; i <= max; i++) {
-        todosLosNumeros.add(i); // <-- Corregido: un solo "Los"
+        todosLosNumeros.add(i); 
     }
     Collections.shuffle(todosLosNumeros, random);
     return new ArrayList<>(todosLosNumeros.subList(0, 5));
@@ -97,11 +94,11 @@ private boolean esNumeroValidoParaColumna(int numero, int columna) {
     
 private int getMinimoColumna(int columna) {
         switch (columna) {
-          case 0: return 1;    // Columna B: 1-15
-           case 1: return 16;   // Columna I: 16-30
-          case 2: return 31;   // Columna N: 31-45
-           case 3: return 46;   // Columna G: 46-60
-          case 4: return 61;   // Columna O: 61-75
+          case 0: return 1;    
+           case 1: return 16;   
+          case 2: return 31;   
+           case 3: return 46;   
+          case 4: return 61;   
             default: return 1;
         }
     }
@@ -109,11 +106,11 @@ private int getMinimoColumna(int columna) {
    
 private int getMaximoColumna(int columna) {
         switch (columna) {
-          case 0: return 15;   // Columna B: 1-15
-          case 1: return 30;   // Columna I: 16-30
-          case 2: return 45;   // Columna N: 31-45
-          case 3: return 60;   // Columna G: 46-60
-          case 4: return 75;   // Columna O: 61-75
+          case 0: return 15;  
+          case 1: return 30;   
+          case 2: return 45;   
+          case 3: return 60;   
+          case 4: return 75;  
            default: return 75;
         }
     }
@@ -146,4 +143,4 @@ private int getMaximoColumna(int columna) {
         
         return true;
     }
-} // Aquí termina la clase FabricaCartones
+}  

@@ -5,30 +5,21 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.Component;
 
-/**
- *
- * @author isaac
- */
 public class PanelTablero extends javax.swing.JPanel {
-    
-    // Lista de 75 paneles que representan los números cantados
+
     private final javax.swing.JPanel[] panelesMarcador = new javax.swing.JPanel[75];
     private final Color COLOR_MARCADO = Color.RED;
     private final Color COLOR_TEXTO_NORMAL = Color.BLACK;
-    // Usaremos Color.WHITE como color base para desmarcar, ya que cambiarTema
-    // se encarga de aplicar el color del tema si está activo.
-    private final Color COLOR_FONDO_INICIAL = Color.WHITE; 
 
-    /**
-     * Creates new form PanelTablero
-     */
+    private final Color COLOR_FONDO_INICIAL = Color.WHITE;
+
     public PanelTablero() {
         initComponents();
         inicializarPanelesMarcador();
-    } 
+    }
 
     private void inicializarPanelesMarcador() {
-        // Inicialización de la lista de paneles para acceso por índice (0-74)
+
         panelesMarcador[0] = panelMarcador_1;
         panelesMarcador[1] = panelMarcador_2;
         panelesMarcador[2] = panelMarcador_3;
@@ -105,109 +96,89 @@ public class PanelTablero extends javax.swing.JPanel {
         panelesMarcador[73] = panelMarcador_74;
         panelesMarcador[74] = panelMarcador_75;
     }
-    
-    // =========================================================================
-    // MÉTODOS DE MARCADO (Nuevas funciones)
-    // =========================================================================
 
-    /**
-     * Marca un número como ya cantado (cambia el color del panel a rojo).
-     * @param numero El número cantado (1 a 75).
-     */
     public void marcarNumero(int numero) {
         if (numero >= 1 && numero <= 75) {
             javax.swing.JPanel panel = panelesMarcador[numero - 1];
             if (panel != null) {
-                panel.setBackground(COLOR_MARCADO); // Marcar con rojo
-                
-                // Asegurar que el texto dentro del JLabel sea blanco para contraste
+                panel.setBackground(COLOR_MARCADO);
+
                 for (Component component : panel.getComponents()) {
                     if (component instanceof JLabel) {
                         ((JLabel) component).setForeground(Color.WHITE);
-                        break; // Solo hay un JLabel por panel
+                        break;
                     }
                 }
             }
         }
     }
 
-    /**
-     * Desmarca un número (restaura el color del panel al color normal).
-     * Esto es esencial para la función de Reiniciar Juego.
-     * @param numero El número a desmarcar (1 a 75).
-     */
     public void desmarcarNumero(int numero) {
         if (numero >= 1 && numero <= 75) {
             javax.swing.JPanel panel = panelesMarcador[numero - 1];
             if (panel != null) {
-                // Restaurar a blanco (o el color que el tema haya definido previamente, 
-                // ya que cambiarTema lo ajustará si está activo)
-                panel.setBackground(COLOR_FONDO_INICIAL); 
-                
-                // Restaurar el texto del JLabel a negro
+
+                panel.setBackground(COLOR_FONDO_INICIAL);
+
                 for (Component component : panel.getComponents()) {
                     if (component instanceof JLabel) {
                         ((JLabel) component).setForeground(COLOR_TEXTO_NORMAL);
-                        break; // Solo hay un JLabel por panel
+                        break;
                     }
                 }
             }
         }
     }
-    
+
     // =========================================================================
     // MÉTODO DE TEMA (Existente)
     // =========================================================================
-
     public void cambiarTema(boolean esOscuro) {
-        // Definición de colores
+
         Color fondoTableroPrincipal;
         Color fondoMarcador;
         Color colorTexto;
 
         if (esOscuro) {
-            // Tema Oscuro:
-            fondoTableroPrincipal = new Color(40, 44, 52); // Gris oscuro principal
-            fondoMarcador = new Color(60, 65, 75); // Gris para los paneles de números
+
+            fondoTableroPrincipal = new Color(40, 44, 52);
+            fondoMarcador = new Color(60, 65, 75);
             colorTexto = Color.WHITE;
         } else {
-            // Tema Claro:
-            fondoTableroPrincipal = new Color(150, 150, 150); // Gris claro para el fondo principal
-            fondoMarcador = Color.WHITE; // Blanco para los paneles de números
+
+            fondoTableroPrincipal = new Color(150, 150, 150);
+            fondoMarcador = Color.WHITE;
             colorTexto = Color.BLACK;
         }
 
-        // 1. Aplicar color al fondo principal del tablero
         TableroConNumero.setBackground(fondoTableroPrincipal);
 
-        // 2. Aplicar color a los 75 paneles de marcador con validación
-        for (javax.swing.JPanel panel : panelesMarcador) { // 'panelesMarcador' es tu arreglo de 75 paneles
+        for (javax.swing.JPanel panel : panelesMarcador) {
             if (panel != null) {
-                
-                // VALIDACIÓN: Solo cambiar el color si el fondo actual NO es rojo (es decir, si no está cantado).
+
                 if (!java.awt.Color.RED.equals(panel.getBackground())) {
                     panel.setBackground(fondoMarcador);
 
-                    // Cambiar el color del texto (JLabel) dentro de cada panel
                     for (java.awt.Component component : panel.getComponents()) {
                         if (component instanceof javax.swing.JLabel) {
                             ((javax.swing.JLabel) component).setForeground(colorTexto);
                         }
                     }
                 } else {
-                    // Si el panel está en rojo (cantado), asegurar que el texto dentro sea blanco.
+
                     for (java.awt.Component component : panel.getComponents()) {
                         if (component instanceof javax.swing.JLabel) {
                             ((javax.swing.JLabel) component).setForeground(java.awt.Color.WHITE);
                         }
                     }
-                }
+                } 
             }
         }
 
         this.revalidate();
         this.repaint();
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

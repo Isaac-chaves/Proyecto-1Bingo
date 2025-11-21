@@ -70,7 +70,7 @@ public class JuegoBingo {
         for (Carton carton : cartones) {
             if (estrategiaActual.verificarVictoria(carton)) {
                 cartonGanador = carton;
-                break; // Primer ganador encontrado
+                break;
             }
         }
     }
@@ -96,22 +96,20 @@ public class JuegoBingo {
         for (Carton carton : cartones) {
             carton.desmarcarNumero(numero);
         }
-        cartonGanador = null; // Resetear ganador al desmarcar
+        cartonGanador = null;
     }
 
     public void reiniciarJuego() {
-        // Si tienes una lista de cartones
-        cartones.clear(); // Borra todos los cartones
 
-        // Reinicia los números cantados (si tienes un tablero)
+        cartones.clear();
+
         if (tablero != null) {
-            tablero.limpiarNumerosCantados(); // usa un método del tablero para limpiar
+            tablero.limpiarNumerosCantados();
         }
 
-        // Reinicia ganador
-        cartonGanador = null; // o como se llame tu variable de ganador
+        cartonGanador = null;
 
-    } 
+    }
 
     private void reiniciarCarton(Carton carton) {
         boolean[][] marcados = carton.getMarcados();
@@ -162,4 +160,4 @@ public class JuegoBingo {
         }
         return "NORMAL";
     }
-}
+} 

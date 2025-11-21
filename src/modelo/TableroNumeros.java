@@ -55,6 +55,6 @@ public class TableroNumeros {
     }
 
     public void limpiarNumerosCantados() {
-        numerosCantados.clear(); // si tu lista se llama numerosCantados
+        numerosCantados.clear(); 
     } 
-}
+}  
